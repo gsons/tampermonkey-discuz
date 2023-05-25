@@ -10,8 +10,11 @@ export default defineConfig({
       entry: 'src/main.ts',
       userscript: {
         icon: 'https://vitejs.dev/logo.svg',
+        require:'https://unpkg.com/jquery@2.2.1/dist/jquery.min.js',
+        "run-at":'document-start',
         namespace: 'npm/vite-plugin-monkey',
-        match: ['https://www.baidu.com/'],
+        match: ['https://www.baidu.com/','https://10010.json'],
+        connect:['cunhua.click','www.cunhua.click']
       },
       build: {
         externalGlobals: {
