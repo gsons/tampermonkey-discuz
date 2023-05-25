@@ -14,50 +14,6 @@
 // @run-at     document-start
 // ==/UserScript==
 
-
-  // 移除所有脚本元素
-  var scriptTags = document.getElementsByTagName('script');
-  for (var i = scriptTags.length - 1; i >= 0; i--) {
-    scriptTags[i].parentNode.removeChild(scriptTags[i]);
-  }
-
-  // 移除所有样式元素
-  var styleTags = document.getElementsByTagName('style');
-  for (i = styleTags.length - 1; i >= 0; i--) {
-    styleTags[i].parentNode.removeChild(styleTags[i]);
-  }
-
-  // 移除所有链接的样式表
-  var linkTags = document.getElementsByTagName('link');
-  for (i = linkTags.length - 1; i >= 0; i--) {
-    var linkTag = linkTags[i];
-    if (linkTag.rel === 'stylesheet') {
-      linkTag.parentNode.removeChild(linkTag);
-    }
-  }
-
-  const head =
-    `<meta charset="UTF-8">
-<link rel="icon" href="/favicon.ico">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Vite App</title>`;
-
-  document.head.innerHTML = head;
-  document.body.innerHTML = '';
-
-  // 获取 body 元素
-  var body = document.getElementsByTagName('body')[0];
-
-  // 获取 body 中的所有元素
-  var elements = body.getElementsByTagName('*');
-
-  // 移除每个元素的行内样式
-  for (i = 0; i < elements.length; i++) {
-    elements[i].removeAttribute('style');
-  }
-  console.clear();
-  
-
 (t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-9b31ad2a]{width:125px;height:100vh;display:flex;background-color:#191919;padding-top:50px}.left-bar .bar[data-v-9b31ad2a]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-9b31ad2a]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-9b31ad2a]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-9b31ad2a]{color:#fd8d29}.top-bar[data-v-a00b83b5]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-a00b83b5]{flex:1;padding-left:20px}.top-bar .logo img[data-v-a00b83b5]{width:50px;height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-a00b83b5]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-a00b83b5]{flex:1}.top-bar .search-bar .bar .input input[data-v-a00b83b5]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-a00b83b5]{display:inline-block;scale:.6}.top-bar .tool[data-v-a00b83b5]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-a00b83b5]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-a00b83b5]{width:300px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:290px}.top-bar .tool[data-v-a00b83b5]{display:none}}.cate-bar[data-v-ae22f32a]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-ae22f32a]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-ae22f32a]{padding-bottom:6px}.cate-bar .cate.active span[data-v-ae22f32a]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%}.vo-item .text p{color:#fff}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-413daf07]{display:flex}.container .left[data-v-413daf07]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-413daf07]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-413daf07]{display:none}@media (max-width: 768px){.container .left[data-v-413daf07]{display:none}.container .right[data-v-413daf07]{padding-left:0}.container .right .cate-bar[data-v-413daf07]{display:flex;top:50px}} ');
 
 (function (vue) {
