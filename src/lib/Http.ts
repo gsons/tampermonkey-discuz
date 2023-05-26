@@ -9,7 +9,7 @@ type Option = {
 
 class Response {
 
-    private str?: string;
+    private str: string;
 
     constructor(text: string) {
         this.str = text;

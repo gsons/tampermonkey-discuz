@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import Discuz from "../lib/Discuz";
 
 interface Cate {
   name: string;
@@ -10,10 +11,7 @@ interface Cate {
 let cate_list = ref<Array<Cate>>([]);
 let cate_index = ref(1);
 
-cate_list.value.push({ name: "分类1", id: 1, active: false });
-cate_list.value.push({ name: "分类2", id: 2, active: true });
-cate_list.value.push({ name: "分类3", id: 3, active: false });
-cate_list.value.push({ name: "分类4", id: 4, active: false });
+cate_list.value=Discuz.getCateList();
 
 async function initCate(id: number, index: number) {
   cate_index.value = index;

@@ -10,7 +10,7 @@ import ListBar from "./components/ListBar.vue";
     <LeftBar class="left"></LeftBar>
     <div class="right">
       <TopBar></TopBar>
-      <CateBar msg="" class="cate-bar"></CateBar>
+      <CateBar class="cate-bar"></CateBar>
       <ListBar></ListBar>
     </div>
   </div>
