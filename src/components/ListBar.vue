@@ -20,6 +20,8 @@ type ItemDto = ArticleDto & Style;
 let item_list = ref<Array<ItemDto>>([]);
 let is_loading = ref(false);
 let page_num = ref(1);
+const loading_img_link = 'https://jsonp.gitee.io/video/img/load.gif';
+const img_404_link = 'https://jsonp.gitee.io/video/img/404.png';
 
 //初始化变量
 const item_width = window.innerWidth < 550 ? Math.floor((window.innerWidth - 20) / 2) : 250;
@@ -29,21 +31,20 @@ const offset = 10;
 async function load_article_img(vo: ItemDto) {
   const img = await Img.load(vo.image_link);
   vo.loaded = img ? true : false;
-  vo.pre_image_link = vo.loaded ? vo.image_link : 'https://jsonp.gitee.io/video/img/404.png';
+  vo.pre_image_link = vo.loaded ? vo.image_link : img_404_link;
   return vo;
 }
 
-async function load_more(page: number) {
+async function load_more(page: number, cid: number) {
   if (is_loading.value) {
     return false;
   } else {
     page_num.value = page;
     is_loading.value = true;
   }
-  console.log('load page:' + page);
-  const loading_img_link = 'https://jsonp.gitee.io/video/img/load.gif';
-
-  let list = await get_data(page);
+  console.log('load page start',{cid,page});
+  await Img.load(loading_img_link) as HTMLImageElement;
+  let list = await get_data(page, cid);
   let arr: Array<ItemDto> = list.map((vo) => {
     return {
       image_link: vo.image_link,
@@ -75,7 +76,7 @@ async function load_more(page: number) {
   await nextTick();
   await update_list(index);
   is_loading.value = false;
-  console.log('load page:' + page, 'finished');
+  console.log('load page finished',{cid,page});
 }
 
 function init_water() {
@@ -105,16 +106,28 @@ async function update_list(index = 0, is_try = false) {
   if (is_try) h_arr = last_h_arr;
 }
 
-async function get_data(page: number): Promise<Array<ArticleDto>> {
-  let res = await Discuz.getListByCate(page);
+async function get_data(page: number, cid: number): Promise<Array<ArticleDto>> {
+  let res = await Discuz.getListByCate(page, cid);
   console.log(res);
   return res;
 }
 
 onMounted(async () => {
+  await Img.load(loading_img_link);
+  await Img.load(img_404_link);
   init_water();
-  await load_more(page_num.value);
+  await load_more(page_num.value, Discuz.cid);
 });
+
+unsafeWindow.addEventListener('hashchange',async () => {
+   let res=/#(\d+)/.exec(location.hash);
+   if(res&& res[1]){
+     Discuz.cid = +res[1];
+   }
+   init_water();
+   item_list.value=[];
+   await load_more(page_num.value, Discuz.cid);
+})
 
 unsafeWindow.onscroll = async () => {
   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -122,9 +135,9 @@ unsafeWindow.onscroll = async () => {
     document.documentElement.clientHeight || document.body.clientHeight;
   let scrollHeight =
     document.documentElement.scrollHeight || document.body.scrollHeight;
-    console.log({scrollTop,windowHeight,scrollHeight});  
+  //console.log({scrollTop,windowHeight,scrollHeight});  
   if (scrollTop + windowHeight >= scrollHeight) {
-    await load_more(page_num.value + 1);
+    await load_more(page_num.value + 1, Discuz.cid);
   }
 };
 </script>
@@ -133,12 +146,12 @@ unsafeWindow.onscroll = async () => {
   <div class="list-bar" id="list-bar">
     <Item :title="item.title" :image_link="item.image_link" :pre_image_link="item.pre_image_link" :href="item.href"
       class="li" v-bind:key="index" v-for="(item, index) in item_list" :id="'vo-item-' + index" :style="{
-        width: item.width + 'px',
-        height: item.height + 'px',
-        left: item.left + 'px',
-        top: item.top + 'px',
-        position: item.position
-      }">
+          width: item.width + 'px',
+          height: item.height + 'px',
+          left: item.left + 'px',
+          top: item.top + 'px',
+          position: item.position
+        }">
       {{ item.title }}
     </Item>
   </div>

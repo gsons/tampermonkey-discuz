@@ -35,14 +35,14 @@ defineProps<ArticleDto>();
         img {
             display: block;
             width: 100%;
-            opacity:0.1
+            opacity:1
         }
     }
 
     .text {
         p {
             color: #FFF;
-            opacity:0.1
+            opacity:1
         }
     }
 }

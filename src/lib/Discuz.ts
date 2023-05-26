@@ -11,19 +11,25 @@ type Cate = {
 
 export default class Discuz {
 
+    static cid:number=39;
 
     static getCateList(): Array<Cate> {
         let list = [{
-            name: '分类1',
+            name: '国产资源',
+            id: 38,
+            active: false
+        }, {
+            name: '直播资源',
             id: 39,
             active: true
-        }, {
-            name: '分类2',
+        },
+        {
+            name: '亚洲无码',
             id: 40,
             active: false
         },
         {
-            name: '分类3',
+            name: '亚洲有码',
             id: 41,
             active: false
         },
