@@ -13,7 +13,7 @@ export default defineConfig({
         description:'vue3-discuz',
         version:'0.1',
         icon: 'https://vitejs.dev/logo.svg',
-        "run-at":'document-start',
+        "run-at":'document-end',
         namespace: 'npm/vite-plugin-monkey',
         match: ['https://jsonp.gitee.io/404.html*'],
         connect:['cunhua.click','www.cunhua.click']
@@ -27,7 +27,6 @@ export default defineConfig({
     }),
   ],
   server:{
-    // host:'192.168.88.3',
     open:false,
   },
 

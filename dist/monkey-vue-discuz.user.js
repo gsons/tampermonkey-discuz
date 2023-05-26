@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         vue3-discuz
 // @namespace    npm/vite-plugin-monkey
-// @version      2.0
+// @version      2.1
 // @author       monkey
 // @description  vue3-discuz
 // @icon         https://vitejs.dev/logo.svg
@@ -6826,6 +6826,7 @@
         let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
         let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        console.log({scrollTop,windowHeight,scrollHeight});
         if (scrollTop + windowHeight >= scrollHeight) {
           await load_more(page_num.value + 1);
         }
