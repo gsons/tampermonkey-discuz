@@ -14,7 +14,7 @@
 // @run-at       document-start
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-15f0f30e]{width:125px;height:100vh;display:flex;background-color:#191919;padding-top:50px}.left-bar .bar[data-v-15f0f30e]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-15f0f30e]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-15f0f30e]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-15f0f30e]{color:#fd8d29}.top-bar[data-v-a00b83b5]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-a00b83b5]{flex:1;padding-left:20px}.top-bar .logo img[data-v-a00b83b5]{width:50px;height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-a00b83b5]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-a00b83b5]{flex:1}.top-bar .search-bar .bar .input input[data-v-a00b83b5]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-a00b83b5]{display:inline-block;scale:.6}.top-bar .tool[data-v-a00b83b5]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-a00b83b5]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-a00b83b5]{width:300px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:290px}.top-bar .tool[data-v-a00b83b5]{display:none}}.cate-bar[data-v-ae22f32a]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-ae22f32a]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-ae22f32a]{padding-bottom:6px}.cate-bar .cate.active span[data-v-ae22f32a]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:.01}.vo-item .text p{color:#fff;opacity:.01}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-629f6985]{display:flex}.container .left[data-v-629f6985]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-629f6985]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-629f6985]{display:none}@media (max-width: 768px){.container .left[data-v-629f6985]{display:none}.container .right[data-v-629f6985]{padding-left:0}.container .right .cate-bar[data-v-629f6985]{display:flex;top:50px}} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-9e92c83d]{width:125px;height:100vh;display:flex;background-color:#191919;padding-top:50px}.left-bar .bar[data-v-9e92c83d]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-9e92c83d]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-9e92c83d]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-9e92c83d]{color:#fd8d29}.top-bar[data-v-a00b83b5]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-a00b83b5]{flex:1;padding-left:20px}.top-bar .logo img[data-v-a00b83b5]{width:50px;height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-a00b83b5]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-a00b83b5]{flex:1}.top-bar .search-bar .bar .input input[data-v-a00b83b5]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-a00b83b5]{display:inline-block;scale:.6}.top-bar .tool[data-v-a00b83b5]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-a00b83b5]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-a00b83b5]{width:300px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:290px}.top-bar .tool[data-v-a00b83b5]{display:none}}.cate-bar[data-v-aee6d5d1]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-aee6d5d1]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-aee6d5d1]{padding-bottom:6px}.cate-bar .cate.active span[data-v-aee6d5d1]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:.01}.vo-item .text p{color:#fff;opacity:.01}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-629f6985]{display:flex}.container .left[data-v-629f6985]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-629f6985]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-629f6985]{display:none}@media (max-width: 768px){.container .left[data-v-629f6985]{display:none}.container .right[data-v-629f6985]{padding-left:0}.container .right .cate-bar[data-v-629f6985]{display:flex;top:50px}} ');
 
 (function (vue, jQuery) {
   'use strict';
@@ -25,6 +25,99 @@
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
     return value;
   };
+  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
+  class Response {
+    constructor(text) {
+      __publicField(this, "str");
+      this.str = text;
+    }
+    json() {
+      let arr;
+      try {
+        if (this.str) {
+          arr = JSON.parse(this.str);
+        } else {
+          throw new Error("数据为空");
+        }
+      } catch (error) {
+        throw new Error("数据格式错误,解析成json失败:" + JSON.stringify(error));
+      }
+      return arr;
+    }
+    text() {
+      return this.str;
+    }
+    toString() {
+      return "" + this.str;
+    }
+  }
+  class Http {
+    static fetch(url, option = {}) {
+      return new Promise((resolve, reject) => {
+        const { method = "GET", headers = {}, body = "" } = option;
+        const requestOptions = {
+          method,
+          headers,
+          data: "",
+          url,
+          onload: (response) => {
+            if (response.status >= 200 && response.status < 400) {
+              resolve(new Response(response.responseText));
+            } else {
+              reject("Http status error:" + response.responseText);
+            }
+          },
+          onerror: (err) => {
+            reject("Http response error:" + JSON.stringify(err));
+          }
+        };
+        if (method.toUpperCase() === "POST" || method.toUpperCase() === "PUT") {
+          requestOptions.data = body;
+        }
+        _GM_xmlhttpRequest(requestOptions);
+      });
+    }
+  }
+  class Discuz {
+    static getCateList() {
+      let list = [
+        {
+          name: "分类1",
+          id: 39,
+          active: true
+        },
+        {
+          name: "分类2",
+          id: 40,
+          active: false
+        },
+        {
+          name: "分类3",
+          id: 41,
+          active: false
+        }
+      ];
+      return list;
+    }
+    static async getListByCate(page = 1, fid = 39) {
+      const mobileOpt = { headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
+      let htmlString = await Http.fetch(`https://cunhua.click/forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
+      let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
+        return `<v-img${match}>`;
+      });
+      const objs = jQuery(html).find(".byg_threadlist_pic .byg_pic_img a").map(function() {
+        let img_link = jQuery(this).find("v-img").attr("src") || "";
+        img_link = img_link.includes("http") ? img_link : "https://cunhua.click/" + img_link;
+        return {
+          title: jQuery(this).attr("title") || "",
+          href: "https://cunhua.click/" + (jQuery(this).attr("href") || ""),
+          image_link: img_link,
+          pre_image_link: ""
+        };
+      }).get();
+      return objs;
+    }
+  }
   const _hoisted_1$a = { class: "left-bar" };
   const _hoisted_2$9 = { class: "cate" };
   const _hoisted_3$6 = ["onClick"];
@@ -33,6 +126,7 @@
     setup(__props) {
       let cate_list = vue.ref([]);
       let cate_index = vue.ref(1);
+      cate_list.value = Discuz.getCateList();
       async function initCate(id, index) {
         cate_index.value = index;
         cate_list.value = cate_list.value.map((vo) => {
@@ -65,7 +159,7 @@
     }
     return target;
   };
-  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-15f0f30e"]]);
+  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-9e92c83d"]]);
   const _sfc_main$9 = {};
   const _hoisted_1$9 = {
     xmlns: "http://www.w3.org/2000/svg",
@@ -185,10 +279,7 @@
     setup(__props) {
       let cate_list = vue.ref([]);
       let cate_index = vue.ref(1);
-      cate_list.value.push({ name: "分类1", id: 1, active: false });
-      cate_list.value.push({ name: "分类2", id: 2, active: true });
-      cate_list.value.push({ name: "分类3", id: 3, active: false });
-      cate_list.value.push({ name: "分类4", id: 4, active: false });
+      cate_list.value = Discuz.getCateList();
       async function initCate(id, index) {
         cate_index.value = index;
         cate_list.value = cate_list.value.map((vo) => {
@@ -210,7 +301,7 @@
       };
     }
   });
-  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-ae22f32a"]]);
+  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-aee6d5d1"]]);
   const _hoisted_1$3 = ["href"];
   const _hoisted_2$2 = { class: "img" };
   const _hoisted_3 = ["src"];
@@ -259,99 +350,39 @@
     return vue.openBlock(), vue.createElementBlock("svg", _hoisted_1$2, _hoisted_4);
   }
   const IconLoading = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
-  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
-  class Response {
-    constructor(text) {
-      __publicField(this, "str");
-      this.str = text;
-    }
-    json() {
-      let arr;
-      try {
-        if (this.str) {
-          arr = JSON.parse(this.str);
-        } else {
-          throw new Error("数据为空");
-        }
-      } catch (error) {
-        throw new Error("数据格式错误,解析成json失败:" + JSON.stringify(error));
-      }
-      return arr;
-    }
-    text() {
-      return this.str;
-    }
-    toString() {
-      return "" + this.str;
-    }
-  }
-  class Http {
-    static fetch(url, option = {}) {
+  const _Img = class {
+    static load(image_link) {
       return new Promise((resolve, reject) => {
-        const { method = "GET", headers = {}, body = "" } = option;
-        const requestOptions = {
-          method,
-          headers,
-          data: "",
-          url,
-          onload: (response) => {
-            if (response.status >= 200 && response.status < 400) {
-              resolve(new Response(response.responseText));
-            } else {
-              reject("Http status error:" + response.responseText);
-            }
-          },
-          onerror: (err) => {
-            reject("Http response error:" + JSON.stringify(err));
-          }
-        };
-        if (method.toUpperCase() === "POST" || method.toUpperCase() === "PUT") {
-          requestOptions.data = body;
+        const image_link_key = encodeURIComponent(image_link);
+        const cache_image = _Img.imgObjList[image_link_key];
+        if (cache_image) {
+          console.warn("cache image", image_link);
+          return resolve(cache_image);
         }
-        _GM_xmlhttpRequest(requestOptions);
+        let img = new Image();
+        img.src = image_link;
+        let timer = setTimeout(() => {
+          resolve(null);
+          console.error("load image " + image_link + " failed on timeout 3s");
+        }, 3e3);
+        img.onload = async () => {
+          _Img.List.push(image_link_key);
+          _Img.imgObjList[image_link_key] = img;
+          clearTimeout(timer);
+          console.log("load image", image_link);
+          resolve(img);
+        };
+        img.onerror = () => {
+          clearTimeout(timer);
+          resolve(null);
+          console.error("load image " + image_link + " failed onerror");
+        };
       });
     }
-  }
-  class Discuz {
-    static getCateList() {
-      let list = [
-        {
-          name: "分类1",
-          id: 39,
-          active: true
-        },
-        {
-          name: "分类2",
-          id: 40,
-          active: false
-        },
-        {
-          name: "分类3",
-          id: 41,
-          active: false
-        }
-      ];
-      return list;
-    }
-    static async getListByCate(page = 1, fid = 39) {
-      const mobileOpt = { headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
-      let htmlString = await Http.fetch(`https://cunhua.click/forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
-      let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
-        return `<v-img${match}>`;
-      });
-      const objs = jQuery(html).find(".byg_threadlist_pic .byg_pic_img a").map(function() {
-        let img_link = jQuery(this).find("v-img").attr("src") || "";
-        img_link = img_link.includes("http") ? img_link : "https://cunhua.click/" + img_link;
-        return {
-          title: jQuery(this).attr("title") || "",
-          href: "https://cunhua.click/" + (jQuery(this).attr("href") || ""),
-          image_link: img_link,
-          pre_image_link: ""
-        };
-      }).get();
-      return objs;
-    }
-  }
+  };
+  let Img = _Img;
+  __publicField(Img, "List", []);
+  __publicField(Img, "imgObjList", {});
   const _hoisted_1$1 = {
     class: "list-bar",
     id: "list-bar"
@@ -362,35 +393,26 @@
     setup(__props) {
       let item_list = vue.ref([]);
       let is_loading = vue.ref(false);
-      let page = vue.ref(1);
+      let page_num = vue.ref(1);
       const item_width = window.innerWidth < 550 ? Math.floor((window.innerWidth - 20) / 2) : 250;
       let h_arr = [];
-      let last_h_arr = [...h_arr];
-      function preload_image(image_link) {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image_link;
-          let timer = setTimeout(() => {
-            resolve(false);
-            console.error("load image " + image_link + " failed on timeout 3s");
-          }, 3e3);
-          img.onload = async () => {
-            clearTimeout(timer);
-            resolve(true);
-          };
-          img.onerror = () => {
-            clearTimeout(timer);
-            resolve(false);
-            console.error("load image " + image_link + " failed onerror");
-          };
-        });
+      async function load_article_img(vo) {
+        const img = await Img.load(vo.image_link);
+        vo.loaded = img ? true : false;
+        vo.pre_image_link = vo.loaded ? vo.image_link : "https://jsonp.gitee.io/video/img/404.png";
+        return vo;
       }
-      async function load_more(page2) {
-        console.log("load page:" + page2);
+      async function load_more(page) {
+        if (is_loading.value) {
+          return false;
+        } else {
+          page_num.value = page;
+          is_loading.value = true;
+        }
+        console.log("load page:" + page);
         const loading_img_link = "https://jsonp.gitee.io/video/img/load.gif";
-        await preload_image(loading_img_link);
-        is_loading.value = true;
-        let list = await get_data(page2);
+        await Img.load(loading_img_link);
+        let list = await get_data(page);
         let arr = list.map((vo) => {
           return {
             image_link: vo.image_link,
@@ -403,20 +425,25 @@
             width: item_width
           };
         });
-        const index = item_list.value.length;
+        let index = item_list.value.length;
         let start_item_list = item_list.value;
         item_list.value = [...start_item_list, ...arr];
-        await update_list(index);
-        let new_arr = await Promise.all(arr.map((vo) => load_item_image(vo)));
-        item_list.value = [...start_item_list, ...new_arr];
+        await vue.nextTick();
         await update_list(index, true);
+        let load_num = 0;
+        for (let i = 0; i < arr.length; i++) {
+          load_article_img(arr[i]).then(async (vo) => {
+            item_list.value[i + index] = vo;
+            load_num++;
+          });
+        }
+        while (load_num < arr.length) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+        await vue.nextTick();
+        await update_list(index);
         is_loading.value = false;
-      }
-      async function load_item_image(vo) {
-        let is_load = await preload_image(vo.image_link);
-        vo.loaded = is_load;
-        vo.pre_image_link = is_load ? vo.image_link : "https://jsonp.gitee.io/video/img/404.png";
-        return vo;
+        console.log("load page:" + page, "finished");
       }
       function init_water() {
         const container = document.getElementById("list-bar");
@@ -428,41 +455,36 @@
         container.style.margin = "0 auto";
         h_arr = Array.from({ length: row_count }, () => 0);
       }
-      async function update_list(index = 0, retry = false) {
-        if (retry) {
-          h_arr = [...last_h_arr];
-        } else {
-          last_h_arr = [...h_arr];
-        }
-        await vue.nextTick();
-        let i = index, lenght = item_list.value.length;
+      async function update_list(index = 0, is_try = false) {
+        let last_h_arr = [...h_arr];
+        let i = index;
+        let lenght = item_list.value.length;
         while (i < lenght) {
           let vo = item_list.value[i];
           const h_i = h_arr.indexOf(Math.min(...h_arr));
           vo.top = h_arr[h_i];
           vo.left = h_i * (offset + item_width);
-          await vue.nextTick();
-          await preload_image(vo.image_link);
           const dom = document.getElementById(`vo-item-${i}`);
           h_arr[h_i] += dom.getBoundingClientRect().height + offset;
           i++;
         }
+        if (is_try)
+          h_arr = last_h_arr;
       }
-      async function get_data(page2) {
-        let res = await Discuz.getListByCate(page2);
+      async function get_data(page) {
+        let res = await Discuz.getListByCate(page);
         console.log(res);
         return res;
       }
       vue.onMounted(async () => {
         init_water();
-        await load_more(page.value++);
       });
       window.onscroll = async () => {
         let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
         let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         if (scrollTop + windowHeight >= scrollHeight) {
-          await load_more(page.value++);
+          await load_more(page_num.value + 1);
         }
       };
       return (_ctx, _cache) => {
