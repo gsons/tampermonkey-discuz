@@ -21,7 +21,7 @@ export default defineConfig({
       build: {
         externalGlobals: {
           vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
-          jquery: cdn.jsdelivr('jquery','dist/jquery.min.js'),
+          jquery: cdn.jsdelivr('jQuery','dist/jquery.min.js'),
         },
       },
     }),

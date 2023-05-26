@@ -41,7 +41,6 @@ async function load_more(page: number) {
   }
   console.log('load page:' + page);
   const loading_img_link = 'https://jsonp.gitee.io/video/img/load.gif';
-  const loading_img = await Img.load(loading_img_link) as HTMLImageElement;
 
   let list = await get_data(page);
   let arr: Array<ItemDto> = list.map((vo) => {
@@ -113,7 +112,7 @@ async function get_data(page: number): Promise<Array<ArticleDto>> {
 
 onMounted(async () => {
   init_water();
-  // await load_more(page_num.value);
+  await load_more(page_num.value);
 });
 
 window.onscroll = async () => {

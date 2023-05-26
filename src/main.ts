@@ -2,7 +2,9 @@ import { createApp } from 'vue';
 import './assets/main.css';
 import App from './App.vue';
 
-document.body.innerHTML = '';
+if(document.body){
+  document.body.innerHTML = '';
+}
 
 createApp(App).mount(
   (() => {

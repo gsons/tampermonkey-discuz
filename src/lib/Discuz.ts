@@ -1,7 +1,7 @@
 import { type ArticleDto } from "../components/Item.vue";
 import Http from "./Http";
 
-import jQuery from 'jquery';
+import jQuery from 'jQuery';
 
 type Cate = {
     name: string,
