@@ -4,6 +4,7 @@ import { ref, onMounted, onUpdated, nextTick } from "vue";
 import IconLoading from "../icons/IconLoading.vue";
 import Discuz from '../lib/Discuz'
 import Img from '../lib/Img'
+import { unsafeWindow } from "$";
 
 //定义相关
 interface Style {
@@ -115,12 +116,13 @@ onMounted(async () => {
   await load_more(page_num.value);
 });
 
-window.onscroll = async () => {
+unsafeWindow.onscroll = async () => {
   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   let windowHeight =
     document.documentElement.clientHeight || document.body.clientHeight;
   let scrollHeight =
     document.documentElement.scrollHeight || document.body.scrollHeight;
+    console.log({scrollTop,windowHeight,scrollHeight});  
   if (scrollTop + windowHeight >= scrollHeight) {
     await load_more(page_num.value + 1);
   }
