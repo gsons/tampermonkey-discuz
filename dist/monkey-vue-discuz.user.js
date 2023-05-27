@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         vue3-discuz
 // @namespace    npm/vite-plugin-monkey
-// @version      2.8
+// @version      3.0
 // @author       monkey
 // @description  vue3-discuz
 // @icon         https://vitejs.dev/logo.svg
