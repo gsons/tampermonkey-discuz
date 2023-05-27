@@ -11,7 +11,7 @@ export default defineConfig({
       userscript: {
         name:'vue3-discuz',
         description:'vue3-discuz',
-        version:'2.7',
+        version:'2.8',
         icon: 'https://vitejs.dev/logo.svg',
         "run-at":'document-end',
         namespace: 'npm/vite-plugin-monkey',

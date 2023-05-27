@@ -6,14 +6,20 @@ import jQuery from 'jQuery';
 type Cate = {
     name: string,
     id: number,
-    active: boolean
+    active: boolean,
 };
 
 export default class Discuz {
 
-    static cid:number=39;
+    static cid: number = 39;
 
     static getCateList(): Array<Cate> {
+
+        let res = /#(\d+)/.exec(location.hash);
+        if (res && res[1]) {
+            Discuz.cid = +res[1];
+        }
+
         let list = [{
             name: '国产资源',
             id: 38,
@@ -21,7 +27,7 @@ export default class Discuz {
         }, {
             name: '直播资源',
             id: 39,
-            active: true
+            active: false
         },
         {
             name: '亚洲无码',
@@ -34,6 +40,11 @@ export default class Discuz {
             active: false
         },
         ]
+
+        list = list.map((vo) => {
+            return { ...vo, ...{ active: Discuz.cid == vo.id } };
+        });
+
         return list;
     }
 
@@ -48,7 +59,8 @@ export default class Discuz {
                 title: jQuery(this).attr('title') || '',
                 href: "https://cunhua.click/" + (jQuery(this).attr('href') || ''),
                 image_link: img_link,
-                pre_image_link: ''
+                pre_image_link: '',
+                img_rate:1,
             }
         }).get();
 

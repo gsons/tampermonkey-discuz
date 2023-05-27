@@ -11,7 +11,13 @@ interface Cate {
 let cate_list = ref<Array<Cate>>([]);
 let cate_index = ref(1);
 
-cate_list.value=Discuz.getCateList();
+let list=Discuz.getCateList();
+
+list.forEach((vo,index)=>{
+   if(vo.active) cate_index.value=index;
+});
+
+cate_list.value=list;
 
 async function initCate(id: number, index: number) {
   cate_index.value = index;

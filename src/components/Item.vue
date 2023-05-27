@@ -1,11 +1,14 @@
 <script setup lang="ts">
 
 export interface ArticleDto {
+    width?:number,
     title: string,
     image_link: string,
     pre_image_link: string,
+    img_rate:number,
     href: string
     loaded?:boolean
+    index?:number
 }
 
 defineProps<ArticleDto>();
@@ -14,9 +17,9 @@ defineProps<ArticleDto>();
 <template>
     <a class="vo-item" :href="href">
         <div class="img">
-            <img :src="pre_image_link" alt="">
+            <img :src="pre_image_link" alt="" :style="{height:((width||150)/img_rate)+'px'}">
         </div>
-        <div class="text">
+        <div class="text" :id="'vo-item-img-' + index">
             <p>
                 {{ title }}
             </p>
@@ -35,14 +38,14 @@ defineProps<ArticleDto>();
         img {
             display: block;
             width: 100%;
-            opacity:1
+            opacity:0.1
         }
     }
 
     .text {
         p {
             color: #FFF;
-            opacity:1
+            opacity:0.1
         }
     }
 }
