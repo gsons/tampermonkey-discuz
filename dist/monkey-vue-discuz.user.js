@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         vue3-discuz
+// @name         村花论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.0
-// @author       monkey
-// @description  vue3-discuz
+// @version      3.01
+// @author       gsonhub
+// @description  村花论坛tampermonkey版本
 // @icon         https://vitejs.dev/logo.svg
 // @match        https://jsonp.gitee.io/404.html*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
@@ -15,7 +15,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-0af51f5a]{width:125px;height:100vh;display:flex;background-color:#191919;padding-top:50px}.left-bar .bar[data-v-0af51f5a]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-0af51f5a]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-0af51f5a]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-0af51f5a]{color:#fd8d29}.top-bar[data-v-a00b83b5]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-a00b83b5]{flex:1;padding-left:20px}.top-bar .logo img[data-v-a00b83b5]{width:50px;height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-a00b83b5]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-a00b83b5]{flex:1}.top-bar .search-bar .bar .input input[data-v-a00b83b5]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-a00b83b5]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-a00b83b5]{display:inline-block;scale:.6}.top-bar .tool[data-v-a00b83b5]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-a00b83b5]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-a00b83b5]{width:300px}.top-bar .search-bar .bar[data-v-a00b83b5]{width:290px}.top-bar .tool[data-v-a00b83b5]{display:none}}.cate-bar[data-v-77b5ccb8]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-77b5ccb8]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-77b5ccb8]{padding-bottom:6px}.cate-bar .cate.active span[data-v-77b5ccb8]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:1}.vo-item .text p{color:#fff;opacity:1}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-d7a231c0]{display:flex}.container .left[data-v-d7a231c0]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-d7a231c0]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-d7a231c0]{display:none}@media (max-width: 768px){.container .left[data-v-d7a231c0]{display:none}.container .right[data-v-d7a231c0]{padding-left:0}.container .right .cate-bar[data-v-d7a231c0]{display:flex;top:50px}} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-158249c8]{width:125px;height:100vh;display:flex;background-color:#191919;position:relative;padding-top:100px}.left-bar .logo[data-v-158249c8]{position:absolute;top:5px;left:5px}.left-bar .logo img[data-v-158249c8]{height:40px}.left-bar .bar[data-v-158249c8]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-158249c8]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-158249c8]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-158249c8]{color:#fd8d29}.top-bar[data-v-3903b0fe]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-3903b0fe]{flex:1;padding-left:0}.top-bar .logo img[data-v-3903b0fe]{height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-3903b0fe]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-3903b0fe]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-3903b0fe]{flex:1}.top-bar .search-bar .bar .input input[data-v-3903b0fe]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-3903b0fe]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-3903b0fe]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-3903b0fe]{display:inline-block;scale:.6}.top-bar .tool[data-v-3903b0fe]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-3903b0fe]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-3903b0fe]{width:300px}.top-bar .search-bar .bar[data-v-3903b0fe]{width:290px}.top-bar .tool[data-v-3903b0fe]{display:none}}.cate-bar[data-v-8593238d]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-8593238d]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-8593238d]{padding-bottom:6px}.cate-bar .cate.active span[data-v-8593238d]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:1}.vo-item .text p{color:#fff;opacity:1}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-d7a231c0]{display:flex}.container .left[data-v-d7a231c0]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-d7a231c0]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-d7a231c0]{display:none}@media (max-width: 768px){.container .left[data-v-d7a231c0]{display:none}.container .right[data-v-d7a231c0]{padding-left:0}.container .right .cate-bar[data-v-d7a231c0]{display:flex;top:50px}} ');
 
 (function (vue, jQuery) {
   'use strict';
@@ -26,12 +26,45 @@
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
     return value;
   };
+  let config = {
+    app_name: "村花论坛tampermonkey",
+    version: "3.01",
+    debug: true,
+    host: "cunhua.click"
+  };
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
+  const _Logger = class {
+    static config(option) {
+      const { appName = "", debug = true } = option;
+      _Logger.appName = appName;
+      _Logger.debug = debug;
+    }
+    static log(...info) {
+      if (_Logger.debug)
+        console.log(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
+    }
+    static info(...info) {
+      if (_Logger.debug)
+        console.info(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
+    }
+    static error(...info) {
+      console.error(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
+    }
+    static warn(...info) {
+      if (_Logger.debug)
+        console.warn(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
+    }
+  };
+  let Logger = _Logger;
+  __publicField(Logger, "appName");
+  __publicField(Logger, "debug");
   class Response {
-    constructor(text) {
+    constructor(text, header) {
       __publicField(this, "str");
+      __publicField(this, "header");
       this.str = text;
+      this.header = header;
     }
     json() {
       let arr;
@@ -56,21 +89,28 @@
   class Http {
     static fetch(url, option = {}) {
       return new Promise((resolve, reject) => {
-        const { method = "GET", headers = {}, body = "" } = option;
+        const { method = "GET", headers = {}, body = "", timeout = 1e4 } = option;
         const requestOptions = {
           method,
           headers,
           data: "",
           url,
+          timeout,
           onload: (response) => {
             if (response.status >= 200 && response.status < 400) {
-              resolve(new Response(response.responseText));
+              resolve(new Response(response.responseText, response.responseHeaders));
             } else {
-              reject("Http status error:" + response.responseText);
+              Logger.error(response);
+              reject(new Error("Http status error:" + response.status));
             }
           },
           onerror: (err) => {
-            reject("Http response error:" + JSON.stringify(err));
+            Logger.error(err);
+            reject(new Error("Http response on error"));
+          },
+          ontimeout: () => {
+            Logger.error("Http response on timeout");
+            reject(new Error("Http response on timeout"));
           }
         };
         if (method.toUpperCase() === "POST" || method.toUpperCase() === "PUT") {
@@ -82,9 +122,13 @@
   }
   const _Discuz = class {
     static getCateList() {
-      let res = /#(\d+)/.exec(location.hash);
+      let res = /^#id=(\d+)$/.exec(location.hash);
       if (res && res[1]) {
         _Discuz.cid = +res[1];
+      }
+      let res2 = /^#key=(.*?)$/.exec(location.hash);
+      if (res2 && res2[1]) {
+        _Discuz.key = res2[1];
       }
       let list = [
         {
@@ -109,22 +153,28 @@
         }
       ];
       list = list.map((vo) => {
-        return { ...vo, ...{ active: _Discuz.cid == vo.id } };
+        return { ...vo, ...{ active: _Discuz.cid == vo.id && _Discuz.key === "" } };
       });
       return list;
     }
     static async getListByCate(page = 1, fid = 39) {
-      const mobileOpt = { headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
-      let htmlString = await Http.fetch(`https://cunhua.click/forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
+      const base_url = "https://" + _Discuz.host + "/";
+      const mobileOpt = {
+        headers: {
+          "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0"
+        },
+        timeout: 1e4
+      };
+      let htmlString = await Http.fetch(`${base_url}forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
       let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
         return `<v-img${match}>`;
       });
       const objs = jQuery(html).find(".byg_threadlist_pic .byg_pic_img a").map(function() {
         let img_link = jQuery(this).find("v-img").attr("src") || "";
-        img_link = img_link.includes("http") ? img_link : "https://cunhua.click/" + img_link;
+        img_link = img_link.includes("http") ? img_link : base_url + img_link;
         return {
           title: jQuery(this).attr("title") || "",
-          href: "https://cunhua.click/" + (jQuery(this).attr("href") || ""),
+          href: base_url + (jQuery(this).attr("href") || ""),
           image_link: img_link,
           pre_image_link: "",
           img_rate: 1
@@ -132,12 +182,115 @@
       }).get();
       return objs;
     }
+    static async search(key, page = 1) {
+      const base_url = "https://" + _Discuz.host + "/";
+      const first_url = base_url + "search.php?mod=forum&mobile=2";
+      const _key = encodeURIComponent(key);
+      const search_id = _Discuz.searchIdObj[_key] ? _Discuz.searchIdObj[_key] : 0;
+      const keyid_url = `https://cunhua.click/search.php?mod=forum&searchid=${search_id}&orderby=lastpost&ascdesc=desc&searchsubmit=yes&page=${page}&mobile=2`;
+      let _url = search_id ? keyid_url : first_url;
+      let htmlString = await Http.fetch(_url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+          "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0"
+        },
+        timeout: 1e4,
+        body: "formhash=daebadd2&srchtxt=" + key + "&searchsubmit=yes"
+      });
+      let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
+        return `<v-img${match}>`;
+      });
+      let res = /searchid=(\d+)/.exec(html);
+      if (res && res[1]) {
+        _Discuz.searchIdObj[_key] = +res[1];
+      }
+      let promise_list = jQuery(html).find("h2.thread_tit + ul").find("li a").map(async function() {
+        let url = base_url + (jQuery(this).attr("href") || "");
+        let image_link = "https://jsonp.gitee.io/video/img/404.png";
+        try {
+          url = await _Discuz.fetchRealUrl(url);
+          image_link = await _Discuz.getImage(url);
+        } catch (error) {
+          Logger.error("load url img faile", { url }, error);
+        }
+        return {
+          title: jQuery(this).text(),
+          href: url,
+          image_link,
+          pre_image_link: "",
+          img_rate: 1
+        };
+      }).get();
+      let list = await Promise.all(promise_list);
+      Logger.log({ list });
+      return list;
+    }
+    static async getImage(url) {
+      const mobileOpt = {
+        headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" },
+        timeout: 5e3
+      };
+      const pcOpt = {};
+      const opt = url.includes("mobile=") ? mobileOpt : pcOpt;
+      const resp = await Http.fetch(url, opt);
+      const html = resp.text();
+      let regex = /<img[^>]+id="aimg_\d+"[^>]*>/g;
+      let matches = html.match(regex);
+      if (matches) {
+        let list = matches.map((htmlString) => {
+          const regex2 = /<img.*?src=["'](.*?)["']/;
+          const [, src] = regex2.exec(htmlString) ?? [];
+          const regex22 = /<img.*?zoomfile=["'](.*?)["']/;
+          const [, zoomfile] = regex22.exec(htmlString) ?? [];
+          return zoomfile ? zoomfile : src;
+        });
+        const image_link = list[Math.floor(Math.random() * list.length)];
+        const base_url = "https://" + _Discuz.host + "/";
+        return /^https?/.test(image_link) ? image_link : base_url + image_link;
+      } else {
+        return "https://jsonp.gitee.io/video/img/404.png";
+      }
+    }
+    static async fetchRealUrl(url) {
+      const mobileOpt = { timeout: 3e3, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
+      const resp = await Http.fetch(url, mobileOpt);
+      const html = resp.text();
+      if (/<head>/.test(html))
+        return url;
+      let [, jsStr] = /<script.*?>([\s\S]*?)<\/script>/gm.exec(html);
+      const temp = `
+        MuURL='';
+        MuObj={
+            href:'',replace:function(abc){MuURL=abc},
+            assign:function(abc){MuURL=abc},
+        };`;
+      jsStr = temp + jsStr.replaceAll("location", "MuObj");
+      let func = new Function(jsStr);
+      func();
+      MuURL = MuURL ? MuURL : MuObj.href || MuObj;
+      let [, _dsign] = /_dsign=(.*)/gm.exec(MuURL);
+      const sign = url.includes("?") ? "&" : "?";
+      const _url = `${url}${sign}_dsign=${_dsign}`;
+      return _url;
+    }
   };
   let Discuz = _Discuz;
   __publicField(Discuz, "cid", 39);
+  __publicField(Discuz, "key", "");
+  __publicField(Discuz, "host", config.host);
+  __publicField(Discuz, "searchIdObj", {});
+  const _withScopeId$1 = (n) => (vue.pushScopeId("data-v-158249c8"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$a = { class: "left-bar" };
-  const _hoisted_2$9 = { class: "cate" };
-  const _hoisted_3$6 = ["onClick"];
+  const _hoisted_2$9 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "logo" }, [
+    /* @__PURE__ */ vue.createElementVNode("img", {
+      alt: "Vue logo",
+      class: "logo",
+      src: "https://www.cunhua.click/template/bygsjw/image/logo.png"
+    })
+  ], -1));
+  const _hoisted_3$6 = { class: "cate" };
+  const _hoisted_4$3 = ["onClick"];
   const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "LeftBar",
     setup(__props) {
@@ -154,21 +307,23 @@
         cate_list.value = cate_list.value.map((vo) => {
           return { ...vo, ...{ active: id == vo.id } };
         });
-        location.hash = `${id}`;
+        Discuz.key = "";
+        location.hash = `id=${id}`;
       }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$a, [
+          _hoisted_2$9,
           vue.createElementVNode("div", {
             class: "bar",
             style: vue.normalizeStyle({ transform: "translateY(" + 55 * vue.unref(cate_index) + "px)" })
           }, null, 4),
-          vue.createElementVNode("div", _hoisted_2$9, [
+          vue.createElementVNode("div", _hoisted_3$6, [
             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(cate_list), (vo, index) => {
               return vue.openBlock(), vue.createElementBlock("div", {
                 class: vue.normalizeClass(["item", { active: vo.active }]),
                 key: index,
                 onClick: ($event) => initCate(vo.id, index)
-              }, vue.toDisplayString(vo.name), 11, _hoisted_3$6);
+              }, vue.toDisplayString(vo.name), 11, _hoisted_4$3);
             }), 128))
           ])
         ]);
@@ -182,7 +337,7 @@
     }
     return target;
   };
-  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-0af51f5a"]]);
+  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-158249c8"]]);
   const _sfc_main$9 = {};
   const _hoisted_1$9 = {
     xmlns: "http://www.w3.org/2000/svg",
@@ -251,34 +406,44 @@
     return vue.openBlock(), vue.createElementBlock("svg", _hoisted_1$6, _hoisted_3$2);
   }
   const SupportIcon = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-a00b83b5"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-3903b0fe"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$5 = { class: "top-bar" };
   const _hoisted_2$4 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "logo" }, [
     /* @__PURE__ */ vue.createElementVNode("img", {
       alt: "Vue logo",
       class: "logo",
-      src: "https://m.mi.com/static/img/icon-header-logo3.ddf2a1c313.png"
+      src: "https://www.cunhua.click/template/bygsjw/image/logo.png"
     })
   ], -1));
   const _hoisted_3$1 = { class: "search-bar" };
   const _hoisted_4$2 = { class: "bar" };
-  const _hoisted_5 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "input" }, [
-    /* @__PURE__ */ vue.createElementVNode("input", {
-      type: "text",
-      placeholder: "请输入关键词搜索。。。"
-    })
-  ], -1));
+  const _hoisted_5 = { class: "input" };
   const _hoisted_6 = { class: "tool" };
   const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
     __name: "TopBar",
     setup(__props) {
+      let key = vue.ref("");
+      function doSearch() {
+        const t = +/* @__PURE__ */ new Date();
+        location.hash = `key=${key.value}_=${t}`;
+      }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$5, [
           _hoisted_2$4,
           vue.createElementVNode("div", _hoisted_3$1, [
             vue.createElementVNode("div", _hoisted_4$2, [
-              _hoisted_5,
-              vue.createElementVNode("button", null, [
+              vue.createElementVNode("div", _hoisted_5, [
+                vue.withDirectives(vue.createElementVNode("input", {
+                  type: "text",
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(key) ? key.value = $event : key = $event),
+                  placeholder: "请输入关键词搜索。。。"
+                }, null, 512), [
+                  [vue.vModelText, vue.unref(key)]
+                ])
+              ]),
+              vue.createElementVNode("button", {
+                onClick: _cache[1] || (_cache[1] = ($event) => doSearch())
+              }, [
                 vue.createVNode(SupportIcon, { class: "icon" }),
                 vue.createTextVNode(" 搜索帖子 ")
               ])
@@ -294,7 +459,7 @@
       };
     }
   });
-  const TopBar = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-a00b83b5"]]);
+  const TopBar = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-3903b0fe"]]);
   const _hoisted_1$4 = { class: "cate-bar" };
   const _hoisted_2$3 = ["onClick"];
   const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
@@ -308,7 +473,8 @@
         cate_list.value = cate_list.value.map((vo) => {
           return { ...vo, ...{ active: id == vo.id } };
         });
-        location.hash = `${id}`;
+        Discuz.key = "";
+        location.hash = `id=${id}`;
       }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$4, [
@@ -325,7 +491,7 @@
       };
     }
   });
-  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-77b5ccb8"]]);
+  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-8593238d"]]);
   const _hoisted_1$3 = ["href"];
   const _hoisted_2$2 = { class: "img" };
   const _hoisted_3 = ["src"];
@@ -393,7 +559,7 @@
         img.src = image_link;
         let timer = setTimeout(() => {
           resolve(null);
-          console.error("load image " + image_link + " failed on timeout 5s");
+          Logger.error("load image " + image_link + " failed on timeout 5s");
         }, 5e3);
         img.onload = async () => {
           _Img.List.push(image_link_key);
@@ -404,7 +570,7 @@
         img.onerror = () => {
           clearTimeout(timer);
           resolve(null);
-          console.error("load image " + image_link + " failed onerror");
+          Logger.error("load image " + image_link + " failed onerror");
         };
       });
     }
@@ -443,9 +609,22 @@
           is_loading_data.value = true;
           is_loading_img.value = true;
         }
-        console.log("load page start", { cid, page });
+        Logger.log("load page start", { cid, page });
         const loading_img = await Img.load(loading_img_link);
-        let list = await get_data(page, cid);
+        let list = [];
+        try {
+          list = await get_data(page, cid);
+        } catch (error) {
+          let msg = "加载失败，请检查网络状况:";
+          if (error instanceof Error) {
+            msg += error.message;
+          } else if (typeof error === "string") {
+            msg += error;
+          } else {
+            msg += JSON.stringify(error);
+          }
+          alert(msg);
+        }
         let arr = list.map((vo) => {
           const rate = loading_img.width / loading_img.height;
           return {
@@ -479,7 +658,7 @@
         await vue.nextTick();
         await update_list(index);
         is_loading_img.value = false;
-        console.log("load page finished", { cid, page });
+        Logger.log("load page finished", { cid, page });
       }
       function init_water() {
         const container = document.getElementById("list-bar");
@@ -509,9 +688,15 @@
           h_arr = last_h_arr;
       }
       async function get_data(page, cid) {
-        let res = await Discuz.getListByCate(page, cid);
-        console.log(res);
-        return res;
+        if (Discuz.key) {
+          Logger.log(1, { key: Discuz.key });
+          let res = await Discuz.search(Discuz.key, page);
+          return res;
+        } else {
+          Logger.log(2, { page, cid });
+          let res = await Discuz.getListByCate(page, cid);
+          return res;
+        }
       }
       vue.onMounted(async () => {
         await Img.load(loading_img_link);
@@ -520,14 +705,18 @@
         await load_more(page_num.value, Discuz.cid);
       });
       _unsafeWindow.addEventListener("hashchange", async () => {
-        let res = /#(\d+)/.exec(location.hash);
-        if (res && res[1]) {
-          Discuz.cid = +res[1];
-        }
         init_water();
         page_num.value = 1;
         item_list.value = [];
-        await load_more(page_num.value, Discuz.cid);
+        let res = /^#id=(\d+)$/.exec(location.hash);
+        let res2 = /^#key=(.*?)_=\d+$/.exec(location.hash);
+        if (res && res[1]) {
+          Discuz.cid = +res[1];
+          await load_more(page_num.value, Discuz.cid);
+        } else if (res2 && res2[1]) {
+          Discuz.key = res2[1];
+          await load_more(page_num.value, Discuz.cid);
+        }
       });
       _unsafeWindow.onscroll = async () => {
         let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -590,9 +779,25 @@
     }
   });
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d7a231c0"]]);
-  if (document.body) {
+  function initHead() {
+    var _a;
+    let metaElements = document.getElementsByTagName("meta");
+    for (let i = metaElements.length - 1; i >= 0; i--) {
+      let metaElement = metaElements[i];
+      (_a = metaElement.parentNode) == null ? void 0 : _a.removeChild(metaElement);
+    }
+    let charsetMeta = document.createElement("meta");
+    charsetMeta.setAttribute("charset", "UTF-8");
+    document.head.appendChild(charsetMeta);
+    let viewportMeta = document.createElement("meta");
+    viewportMeta.setAttribute("name", "viewport");
+    viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
+    document.head.appendChild(viewportMeta);
+    document.title = config.app_name;
     document.body.innerHTML = "";
   }
+  Logger.config({ debug: config.debug });
+  initHead();
   vue.createApp(App).mount(
     (() => {
       const app = document.createElement("div");

@@ -18,7 +18,8 @@ async function initCate(id: number, index: number) {
   cate_list.value = cate_list.value.map((vo) => {
     return { ...vo, ...{ active: id == vo.id } };
   });
-  location.hash=`${id}`;
+  Discuz.key='';
+  location.hash=`id=${id}`;
 }
 
 </script>

@@ -9,9 +9,10 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        name:'vue3-discuz',
-        description:'vue3-discuz',
-        version:'3.0',
+        name:'村花论坛tampermonkey',
+        description:'村花论坛tampermonkey版本',
+        author:'gsonhub',
+        version:'3.01',
         icon: 'https://vitejs.dev/logo.svg',
         "run-at":'document-end',
         namespace: 'npm/vite-plugin-monkey',

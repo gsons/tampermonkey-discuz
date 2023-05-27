@@ -1,6 +1,7 @@
 import { GM_xmlhttpRequest, XhrRequest, TResponse, ErrorResponse } from "$";
+import { Logger } from '../lib/Logger';
 
-type _Option = Pick<XhrRequest, 'method' | 'headers' | 'data'>;
+type _Option = Pick<XhrRequest, 'method' | 'headers' | 'data' | 'timeout'>;
 
 type Option = {
     [K in keyof _Option as K extends 'data' ? 'body' : K]: _Option[K];
@@ -10,9 +11,11 @@ type Option = {
 class Response {
 
     private str: string;
+    private header: string;
 
-    constructor(text: string) {
+    constructor(text: string,header:string) {
         this.str = text;
+        this.header = header;
     }
 
     public json() {
@@ -41,21 +44,28 @@ class Response {
 class Http {
     static fetch(url: string, option: Option = {}): Promise<Response> {
         return new Promise((resolve, reject) => {
-            const { method = 'GET', headers = {}, body = '' } = option;
+            const { method = 'GET', headers = {}, body = '', timeout = 10000 } = option;
             const requestOptions: XhrRequest = {
                 method: method,
                 headers: headers,
                 data: '',
                 url: url,
+                timeout: timeout,
                 onload: (response: TResponse<object>) => {
                     if (response.status >= 200 && response.status < 400) {
-                        resolve(new Response(response.responseText));
+                        resolve(new Response(response.responseText,response.responseHeaders));
                     } else {
-                        reject('Http status error:' + response.responseText);
+                        Logger.error(response);
+                        reject(new Error('Http status error:' + response.status));
                     }
                 },
                 onerror: (err: ErrorResponse) => {
-                    reject('Http response error:' + JSON.stringify(err));
+                    Logger.error(err);
+                    reject(new Error('Http response on error'));
+                },
+                ontimeout: () => {
+                    Logger.error('Http response on timeout');
+                    reject(new Error('Http response on timeout'));
                 },
             };
             if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT') {

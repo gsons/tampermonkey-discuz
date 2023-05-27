@@ -24,12 +24,17 @@ async function initCate(id: number, index: number) {
   cate_list.value = cate_list.value.map((vo) => {
     return { ...vo, ...{ active: id == vo.id } };
   });
-  location.hash=`${id}`;
+  Discuz.key='';
+  location.hash=`id=${id}`;
 }
 </script>
 
 <template>
+
   <div class="left-bar">
+    <div class="logo">
+      <img alt="Vue logo" class="logo" src="https://www.cunhua.click/template/bygsjw/image/logo.png" />
+  </div>
     <div
       class="bar"
       :style="{ transform: 'translateY(' + 55 * cate_index + 'px)' }"
@@ -54,7 +59,16 @@ async function initCate(id: number, index: number) {
   height: 100vh;
   display: flex;
   background-color: #191919;
-  padding-top: 50px;
+  position: relative;
+  padding-top: 100px;
+  .logo{
+    position:absolute;
+    top:5px;
+    left:5px;
+    img{
+      height: 40px;
+    }
+  }
   .bar {
     width: 2px;
     height: 14px;

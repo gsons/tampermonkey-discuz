@@ -5,6 +5,7 @@ import IconLoading from "../icons/IconLoading.vue";
 import Discuz from '../lib/Discuz'
 import Img from '../lib/Img'
 import { unsafeWindow } from "$";
+import { Logger } from '../lib/Logger';
 
 //定义相关
 interface Style {
@@ -32,27 +33,46 @@ const offset = 10;
 async function load_article_img(vo: ItemDto) {
   const img = await Img.load(vo.image_link);
   vo.loaded = img ? true : false;
-  vo.img_rate=img?img.width/img.height :1;
+  vo.img_rate = img ? img.width / img.height : 1;
   vo.pre_image_link = vo.loaded ? vo.image_link : img_404_link;
   return vo;
 }
 
 async function load_more(page: number, cid: number) {
-  if (is_loading_data.value||is_loading_img.value) {
+  if (is_loading_data.value || is_loading_img.value) {
     return false;
   } else {
     page_num.value = page;
     is_loading_data.value = true;
     is_loading_img.value = true;
   }
-  console.log('load page start', { cid, page });
-  const loading_img=await Img.load(loading_img_link) as HTMLImageElement;
-  let list = await get_data(page, cid);
+  Logger.log('load page start', { cid, page });
+  const loading_img = await Img.load(loading_img_link) as HTMLImageElement;
+
+  let list: Array<ArticleDto> = [];
+  try {
+    list = await get_data(page, cid);
+  } catch (error) {
+    let msg = '加载失败，请检查网络状况:';
+    if (error instanceof Error) {
+      msg += error.message;
+    }
+    else if (typeof error === 'string') {
+      msg += error;
+    }
+    else {
+      msg += JSON.stringify(error);
+    }
+    alert(msg);
+  }
+
+  // Logger.log({list});
+
   let arr: Array<ItemDto> = list.map((vo) => {
-    const rate=loading_img.width/loading_img.height;
+    const rate = loading_img.width / loading_img.height;
     return {
       image_link: vo.image_link,
-      img_rate:rate,
+      img_rate: rate,
       pre_image_link: loading_img_link,
       title: vo.title,
       href: vo.href,
@@ -82,7 +102,7 @@ async function load_more(page: number, cid: number) {
   await nextTick();
   await update_list(index);
   is_loading_img.value = false;
-  console.log('load page finished', { cid, page });
+  Logger.log('load page finished', { cid, page });
 }
 
 function init_water() {
@@ -107,19 +127,25 @@ async function update_list(index = 0, is_try = false) {
     vo.left = h_i * (offset + item_width);
     // await nextTick();
     const dom = document.getElementById(`vo-item-img-${i}`) as HTMLDivElement;
-    const _height=(item_width/vo.img_rate) +dom.getBoundingClientRect().height+ offset;
+    const _height = (item_width / vo.img_rate) + dom.getBoundingClientRect().height + offset;
     h_arr[h_i] += _height;
     //h_arr[h_i] += dom.getBoundingClientRect().height + offset;
-    //if(!is_try)console.log({index:i,height:_height});
+    //if(!is_try)Logger.log({index:i,height:_height});
     i++;
   }
   if (is_try) h_arr = last_h_arr;
 }
 
 async function get_data(page: number, cid: number): Promise<Array<ArticleDto>> {
-  let res = await Discuz.getListByCate(page, cid);
-  console.log(res);
-  return res;
+  if (Discuz.key) {
+    Logger.log(1,{key:Discuz.key});
+    let res = await Discuz.search(Discuz.key,page);
+    return res;
+  } else {
+    Logger.log(2,{page, cid});
+    let res = await Discuz.getListByCate(page, cid);
+    return res;
+  }
 }
 
 onMounted(async () => {
@@ -130,14 +156,20 @@ onMounted(async () => {
 });
 
 unsafeWindow.addEventListener('hashchange', async () => {
-  let res = /#(\d+)/.exec(location.hash);
-  if (res && res[1]) {
-    Discuz.cid = +res[1];
-  }
   init_water();
   page_num.value = 1;
   item_list.value = [];
-  await load_more(page_num.value, Discuz.cid);
+
+  let res = /^#id=(\d+)$/.exec(location.hash);
+  let res2 = /^#key=(.*?)_=\d+$/.exec(location.hash);
+  if (res && res[1]) {
+    Discuz.cid = +res[1];
+    await load_more(page_num.value, Discuz.cid);
+  }
+  else if (res2 && res2[1]) {
+    Discuz.key = res2[1];
+    await load_more(page_num.value, Discuz.cid);
+  }
 })
 
 unsafeWindow.onscroll = async () => {
@@ -146,8 +178,8 @@ unsafeWindow.onscroll = async () => {
     document.documentElement.clientHeight || document.body.clientHeight;
   let scrollHeight =
     document.documentElement.scrollHeight || document.body.scrollHeight;
-  // console.log({scrollTop,windowHeight,scrollHeight});  
-  if (scrollTop + windowHeight+15 >= scrollHeight) {
+  // Logger.log({scrollTop,windowHeight,scrollHeight});  
+  if (scrollTop + windowHeight + 15 >= scrollHeight) {
     await load_more(page_num.value + 1, Discuz.cid);
   }
 };
@@ -155,8 +187,9 @@ unsafeWindow.onscroll = async () => {
 
 <template>
   <div class="list-bar" id="list-bar">
-    <Item :width="item.width" :index="index" :img_rate="item.img_rate" :title="item.title" :image_link="item.image_link" :pre_image_link="item.pre_image_link" :href="item.href"
-      class="li" v-bind:key="index" v-for="(item, index) in item_list" :id="'vo-item-' + index" :style="{
+    <Item :width="item.width" :index="index" :img_rate="item.img_rate" :title="item.title" :image_link="item.image_link"
+      :pre_image_link="item.pre_image_link" :href="item.href" class="li" v-bind:key="index"
+      v-for="(item, index) in item_list" :id="'vo-item-' + index" :style="{
           width: item.width + 'px',
           height: item.height + 'px',
           left: item.left + 'px',

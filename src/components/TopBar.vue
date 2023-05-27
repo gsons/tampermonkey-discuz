@@ -5,19 +5,27 @@ import ToolingIcon from '../icons/IconTooling.vue'
 import EcosystemIcon from '../icons/IconEcosystem.vue'
 import CommunityIcon from '../icons/IconCommunity.vue'
 import SupportIcon from '../icons/IconSupport.vue'
+
+let key=ref<string>('');
+
+function doSearch(){
+    const t=+new Date();
+    location.hash=`key=${key.value}_=${t}`;
+}
+
 </script>
 
 <template>
     <div class="top-bar">
         <div class="logo">
-            <img alt="Vue logo" class="logo" src="https://m.mi.com/static/img/icon-header-logo3.ddf2a1c313.png" />
+            <img alt="Vue logo" class="logo" src="https://www.cunhua.click/template/bygsjw/image/logo.png" />
         </div>
         <div class="search-bar">
             <div class="bar">
                 <div class="input">
-                    <input type="text" placeholder="请输入关键词搜索。。。">
+                    <input type="text" v-model="key" placeholder="请输入关键词搜索。。。">
                 </div>
-                <button>
+                <button @click="doSearch()">
                     <SupportIcon class="icon" />
                     搜索帖子
                 </button>
@@ -46,10 +54,10 @@ import SupportIcon from '../icons/IconSupport.vue'
 
     .logo {
         flex: 1;
-        padding-left: 20px;
+        padding-left: 0px;
 
         img {
-            width: 50px;
+            // width: 50px;
             height: 50px;
             display: block;
             padding: 10px;
