@@ -30,11 +30,15 @@ const item_width = window.innerWidth < 550 ? Math.floor((window.innerWidth - 20)
 let h_arr: Array<number> = [];
 const offset = 10;
 
-async function load_article_img(vo: ItemDto) {
-  const img = await Img.load(vo.image_link);
+async function load_article_img(vo: ItemDto, index: number) {
+  const img = await Img.load(vo.image_link, (is_load) => {
+    Logger.log({ is_load }, vo.image_link);
+    vo.pre_image_link = is_load ? vo.image_link : Discuz.Img404Link;
+    item_list.value[index] = vo;
+  });
   vo.loaded = img ? true : false;
-  vo.img_rate = img ? img.width / img.height : 1;
-  vo.pre_image_link = vo.loaded ? vo.image_link : img_404_link;
+  vo.img_rate = img ? img.width / img.height : 0.72;
+  vo.pre_image_link = img ? vo.image_link : Discuz.ImgLoadingLink;
   return vo;
 }
 
@@ -66,7 +70,7 @@ async function load_more(page: number, cid: number) {
     alert(msg);
   }
 
-  // Logger.log({list});
+  Logger.log({ list });
 
   let arr: Array<ItemDto> = list.map((vo) => {
     const rate = loading_img.width / loading_img.height;
@@ -91,7 +95,7 @@ async function load_more(page: number, cid: number) {
 
   let load_num = 0;
   for (let i = 0; i < arr.length; i++) {
-    load_article_img(arr[i]).then(async (vo) => {
+    load_article_img(arr[i], i + index).then((vo) => {
       item_list.value[i + index] = vo;
       load_num++;
     });
@@ -102,7 +106,7 @@ async function load_more(page: number, cid: number) {
   await nextTick();
   await update_list(index);
   is_loading_img.value = false;
-  Logger.log('load page finished', { cid, page });
+  Logger.log('load page finished', { cid, page, load_num });
 }
 
 function init_water() {
@@ -125,12 +129,9 @@ async function update_list(index = 0, is_try = false) {
     const h_i = h_arr.indexOf(Math.min(...h_arr));
     vo.top = h_arr[h_i];
     vo.left = h_i * (offset + item_width);
-    // await nextTick();
     const dom = document.getElementById(`vo-item-img-${i}`) as HTMLDivElement;
     const _height = (item_width / vo.img_rate) + dom.getBoundingClientRect().height + offset;
     h_arr[h_i] += _height;
-    //h_arr[h_i] += dom.getBoundingClientRect().height + offset;
-    //if(!is_try)Logger.log({index:i,height:_height});
     i++;
   }
   if (is_try) h_arr = last_h_arr;
@@ -138,11 +139,11 @@ async function update_list(index = 0, is_try = false) {
 
 async function get_data(page: number, cid: number): Promise<Array<ArticleDto>> {
   if (Discuz.key) {
-    Logger.log(1,{key:Discuz.key});
-    let res = await Discuz.search(Discuz.key,page);
+    Logger.log('serach page', { key: Discuz.key });
+    let res = await Discuz.search(Discuz.key, page);
     return res;
   } else {
-    Logger.log(2,{page, cid});
+    Logger.log('cate page', { page, cid });
     let res = await Discuz.getListByCate(page, cid);
     return res;
   }
@@ -160,16 +161,10 @@ unsafeWindow.addEventListener('hashchange', async () => {
   page_num.value = 1;
   item_list.value = [];
 
-  let res = /^#id=(\d+)$/.exec(location.hash);
-  let res2 = /^#key=(.*?)_=\d+$/.exec(location.hash);
-  if (res && res[1]) {
-    Discuz.cid = +res[1];
-    await load_more(page_num.value, Discuz.cid);
-  }
-  else if (res2 && res2[1]) {
-    Discuz.key = res2[1];
-    await load_more(page_num.value, Discuz.cid);
-  }
+  Discuz.initRoute();
+
+  await load_more(page_num.value, Discuz.cid);
+
 })
 
 unsafeWindow.onscroll = async () => {

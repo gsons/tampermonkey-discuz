@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         村花论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.01
+// @version      3.02
 // @author       gsonhub
 // @description  村花论坛tampermonkey版本
 // @icon         https://vitejs.dev/logo.svg
@@ -28,7 +28,7 @@
   };
   let config = {
     app_name: "村花论坛tampermonkey",
-    version: "3.01",
+    version: "3.02",
     debug: true,
     host: "cunhua.click"
   };
@@ -40,11 +40,25 @@
       _Logger.appName = appName;
       _Logger.debug = debug;
     }
+    static traceCall() {
+      const error = new Error();
+      if (error.stack) {
+        const stackLines = error.stack.split("\n");
+        if (stackLines[3]) {
+          return stackLines[3];
+        }
+      }
+      return "";
+    }
     static log(...info) {
+      const trace = _Logger.traceCall();
+      info = [...info, trace];
       if (_Logger.debug)
         console.log(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
     }
     static info(...info) {
+      const trace = _Logger.traceCall();
+      info = [...info, trace];
       if (_Logger.debug)
         console.info(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
     }
@@ -52,6 +66,8 @@
       console.error(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
     }
     static warn(...info) {
+      const trace = _Logger.traceCall();
+      info = [...info, trace];
       if (_Logger.debug)
         console.warn(_Logger.appName, (/* @__PURE__ */ new Date()).toLocaleString(), ...info);
     }
@@ -121,15 +137,16 @@
     }
   }
   const _Discuz = class {
+    static initRoute() {
+      let [, cid] = /^#id=(\d+)$/.exec(location.hash) ?? [];
+      if (cid)
+        _Discuz.cid = +cid;
+      let [, key] = /^#key=(.*?)_=\d+$/.exec(location.hash) ?? [];
+      if (key)
+        _Discuz.key = key;
+    }
     static getCateList() {
-      let res = /^#id=(\d+)$/.exec(location.hash);
-      if (res && res[1]) {
-        _Discuz.cid = +res[1];
-      }
-      let res2 = /^#key=(.*?)$/.exec(location.hash);
-      if (res2 && res2[1]) {
-        _Discuz.key = res2[1];
-      }
+      _Discuz.initRoute();
       let list = [
         {
           name: "国产资源",
@@ -158,44 +175,46 @@
       return list;
     }
     static async getListByCate(page = 1, fid = 39) {
-      const base_url = "https://" + _Discuz.host + "/";
       const mobileOpt = {
         headers: {
           "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0"
         },
-        timeout: 1e4
+        timeout: 3e4
       };
-      let htmlString = await Http.fetch(`${base_url}forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
+      let htmlString = await Http.fetch(`${_Discuz.BaseUrl}forum.php?mod=forumdisplay&fid=${fid}&mobile=2&page=${page}`, mobileOpt);
       let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
         return `<v-img${match}>`;
       });
       const objs = jQuery(html).find(".byg_threadlist_pic .byg_pic_img a").map(function() {
         let img_link = jQuery(this).find("v-img").attr("src") || "";
-        img_link = img_link.includes("http") ? img_link : base_url + img_link;
+        img_link = img_link.includes("http") ? img_link : _Discuz.BaseUrl + img_link;
         return {
           title: jQuery(this).attr("title") || "",
-          href: base_url + (jQuery(this).attr("href") || ""),
+          href: _Discuz.BaseUrl + (jQuery(this).attr("href") || ""),
           image_link: img_link,
           pre_image_link: "",
-          img_rate: 1
+          img_rate: 0.72
         };
       }).get();
       return objs;
     }
     static async search(key, page = 1) {
-      const base_url = "https://" + _Discuz.host + "/";
-      const first_url = base_url + "search.php?mod=forum&mobile=2";
+      const first_url = _Discuz.BaseUrl + "search.php?mod=forum&mobile=2";
       const _key = encodeURIComponent(key);
       const search_id = _Discuz.searchIdObj[_key] ? _Discuz.searchIdObj[_key] : 0;
       const keyid_url = `https://cunhua.click/search.php?mod=forum&searchid=${search_id}&orderby=lastpost&ascdesc=desc&searchsubmit=yes&page=${page}&mobile=2`;
       let _url = search_id ? keyid_url : first_url;
+      let body_data = new FormData();
+      body_data.append("formhash", "daebadd2");
+      body_data.append("srchtxt", key);
+      body_data.append("searchsubmit", "yes");
       let htmlString = await Http.fetch(_url, {
         method: "POST",
         headers: {
           "content-type": "application/x-www-form-urlencoded",
           "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0"
         },
-        timeout: 1e4,
+        timeout: 3e4,
         body: "formhash=daebadd2&srchtxt=" + key + "&searchsubmit=yes"
       });
       let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
@@ -204,32 +223,35 @@
       let res = /searchid=(\d+)/.exec(html);
       if (res && res[1]) {
         _Discuz.searchIdObj[_key] = +res[1];
+      } else {
+        Logger.error("can not fetch searchid");
+        throw new Error("can not fetch searchid");
       }
       let promise_list = jQuery(html).find("h2.thread_tit + ul").find("li a").map(async function() {
-        let url = base_url + (jQuery(this).attr("href") || "");
-        let image_link = "https://jsonp.gitee.io/video/img/404.png";
+        let url = _Discuz.BaseUrl + (jQuery(this).attr("href") || "");
+        let image_link = _Discuz.Img404Link;
         try {
           url = await _Discuz.fetchRealUrl(url);
           image_link = await _Discuz.getImage(url);
         } catch (error) {
-          Logger.error("load url img faile", { url }, error);
+          Logger.error("load url img failed", url, error);
         }
         return {
           title: jQuery(this).text(),
           href: url,
           image_link,
           pre_image_link: "",
-          img_rate: 1
+          img_rate: 0.72
         };
       }).get();
       let list = await Promise.all(promise_list);
-      Logger.log({ list });
+      Logger.log("search list", { list });
       return list;
     }
     static async getImage(url) {
       const mobileOpt = {
         headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" },
-        timeout: 5e3
+        timeout: 3e4
       };
       const pcOpt = {};
       const opt = url.includes("mobile=") ? mobileOpt : pcOpt;
@@ -246,19 +268,18 @@
           return zoomfile ? zoomfile : src;
         });
         const image_link = list[Math.floor(Math.random() * list.length)];
-        const base_url = "https://" + _Discuz.host + "/";
-        return /^https?/.test(image_link) ? image_link : base_url + image_link;
+        return /^https?/.test(image_link) ? image_link : _Discuz.BaseUrl + image_link;
       } else {
-        return "https://jsonp.gitee.io/video/img/404.png";
+        return _Discuz.Img404Link;
       }
     }
     static async fetchRealUrl(url) {
-      const mobileOpt = { timeout: 3e3, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
+      const mobileOpt = { timeout: 3e4, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
       const resp = await Http.fetch(url, mobileOpt);
       const html = resp.text();
       if (/<head>/.test(html))
         return url;
-      let [, jsStr] = /<script.*?>([\s\S]*?)<\/script>/gm.exec(html);
+      let [, jsStr] = /<script.*?>([\s\S]*?)<\/script>/gm.exec(html) ?? [];
       const temp = `
         MuURL='';
         MuObj={
@@ -269,7 +290,7 @@
       let func = new Function(jsStr);
       func();
       MuURL = MuURL ? MuURL : MuObj.href || MuObj;
-      let [, _dsign] = /_dsign=(.*)/gm.exec(MuURL);
+      let [, _dsign] = /_dsign=(.*)/gm.exec(MuURL) ?? [];
       const sign = url.includes("?") ? "&" : "?";
       const _url = `${url}${sign}_dsign=${_dsign}`;
       return _url;
@@ -278,7 +299,10 @@
   let Discuz = _Discuz;
   __publicField(Discuz, "cid", 39);
   __publicField(Discuz, "key", "");
-  __publicField(Discuz, "host", config.host);
+  __publicField(Discuz, "Img404Link", "https://jsonp.gitee.io/video/img/404.png");
+  __publicField(Discuz, "ImgLoadingLink", "https://jsonp.gitee.io/video/img/load.gif");
+  __publicField(Discuz, "Host", config.host);
+  __publicField(Discuz, "BaseUrl", `https://${config.host}/`);
   __publicField(Discuz, "searchIdObj", {});
   const _withScopeId$1 = (n) => (vue.pushScopeId("data-v-158249c8"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$a = { class: "left-bar" };
@@ -548,26 +572,33 @@
   }
   const IconLoading = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
   const _Img = class {
-    static load(image_link) {
+    static load(image_link, func = (is_load) => {
+    }) {
       return new Promise((resolve, reject) => {
         const image_link_key = encodeURIComponent(image_link);
         const cache_image = _Img.imgObjList[image_link_key];
         if (cache_image) {
           return resolve(cache_image);
         }
+        let is_timeout = false;
         let img = new Image();
         img.src = image_link;
         let timer = setTimeout(() => {
+          is_timeout = true;
           resolve(null);
-          Logger.error("load image " + image_link + " failed on timeout 5s");
-        }, 5e3);
+          Logger.error("load image " + image_link + " failed on timeout 10s");
+        }, 3e4);
         img.onload = async () => {
+          if (is_timeout)
+            func.call(this, true);
           _Img.List.push(image_link_key);
           _Img.imgObjList[image_link_key] = img;
           clearTimeout(timer);
           resolve(img);
         };
         img.onerror = () => {
+          if (is_timeout)
+            func.call(this, false);
           clearTimeout(timer);
           resolve(null);
           Logger.error("load image " + image_link + " failed onerror");
@@ -594,11 +625,15 @@
       let page_num = vue.ref(1);
       const item_width = window.innerWidth < 550 ? Math.floor((window.innerWidth - 20) / 2) : 250;
       let h_arr = [];
-      async function load_article_img(vo) {
-        const img = await Img.load(vo.image_link);
+      async function load_article_img(vo, index) {
+        const img = await Img.load(vo.image_link, (is_load) => {
+          Logger.log({ is_load }, vo.image_link);
+          vo.pre_image_link = is_load ? vo.image_link : Discuz.Img404Link;
+          item_list.value[index] = vo;
+        });
         vo.loaded = img ? true : false;
-        vo.img_rate = img ? img.width / img.height : 1;
-        vo.pre_image_link = vo.loaded ? vo.image_link : img_404_link;
+        vo.img_rate = img ? img.width / img.height : 0.72;
+        vo.pre_image_link = img ? vo.image_link : Discuz.ImgLoadingLink;
         return vo;
       }
       async function load_more(page, cid) {
@@ -625,6 +660,7 @@
           }
           alert(msg);
         }
+        Logger.log({ list });
         let arr = list.map((vo) => {
           const rate = loading_img.width / loading_img.height;
           return {
@@ -647,7 +683,7 @@
         await update_list(index, true);
         let load_num = 0;
         for (let i = 0; i < arr.length; i++) {
-          load_article_img(arr[i]).then(async (vo) => {
+          load_article_img(arr[i], i + index).then((vo) => {
             item_list.value[i + index] = vo;
             load_num++;
           });
@@ -658,7 +694,7 @@
         await vue.nextTick();
         await update_list(index);
         is_loading_img.value = false;
-        Logger.log("load page finished", { cid, page });
+        Logger.log("load page finished", { cid, page, load_num });
       }
       function init_water() {
         const container = document.getElementById("list-bar");
@@ -689,11 +725,11 @@
       }
       async function get_data(page, cid) {
         if (Discuz.key) {
-          Logger.log(1, { key: Discuz.key });
+          Logger.log("serach page", { key: Discuz.key });
           let res = await Discuz.search(Discuz.key, page);
           return res;
         } else {
-          Logger.log(2, { page, cid });
+          Logger.log("cate page", { page, cid });
           let res = await Discuz.getListByCate(page, cid);
           return res;
         }
@@ -708,15 +744,8 @@
         init_water();
         page_num.value = 1;
         item_list.value = [];
-        let res = /^#id=(\d+)$/.exec(location.hash);
-        let res2 = /^#key=(.*?)_=\d+$/.exec(location.hash);
-        if (res && res[1]) {
-          Discuz.cid = +res[1];
-          await load_more(page_num.value, Discuz.cid);
-        } else if (res2 && res2[1]) {
-          Discuz.key = res2[1];
-          await load_more(page_num.value, Discuz.cid);
-        }
+        Discuz.initRoute();
+        await load_more(page_num.value, Discuz.cid);
       });
       _unsafeWindow.onscroll = async () => {
         let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;

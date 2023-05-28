@@ -12,7 +12,7 @@ export default defineConfig({
         name:'村花论坛tampermonkey',
         description:'村花论坛tampermonkey版本',
         author:'gsonhub',
-        version:'3.01',
+        version:'3.02',
         icon: 'https://vitejs.dev/logo.svg',
         "run-at":'document-end',
         namespace: 'npm/vite-plugin-monkey',

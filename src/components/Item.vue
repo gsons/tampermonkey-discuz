@@ -42,7 +42,7 @@ defineProps<ArticleDto>();
         }
     }
 
-    .text {
+    .text { 
         p {
             color: #FFF;
             opacity:1
