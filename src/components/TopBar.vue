@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import DocumentationIcon from '../icons/IconDocumentation.vue'
 import ToolingIcon from '../icons/IconTooling.vue'
 import EcosystemIcon from '../icons/IconEcosystem.vue'
 import CommunityIcon from '../icons/IconCommunity.vue'
 import SupportIcon from '../icons/IconSupport.vue'
+import { store } from '../lib/Store'
 
 let key=ref<string>('');
 
@@ -12,6 +13,11 @@ function doSearch(){
     const t=+new Date();
     location.hash=`key=${key.value}_=${t}`;
 }
+
+watch(store,()=>{
+     key.value=decodeURIComponent(store.key);
+});
+
 
 </script>
 
@@ -23,7 +29,7 @@ function doSearch(){
         <div class="search-bar">
             <div class="bar">
                 <div class="input">
-                    <input type="text" v-model="key" placeholder="请输入关键词搜索。。。">
+                    <input type="search" v-model="key" @keyup.enter="doSearch()" placeholder="请输入关键词搜索。。。">
                 </div>
                 <button @click="doSearch()">
                     <SupportIcon class="icon" />

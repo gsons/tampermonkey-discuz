@@ -6,6 +6,7 @@ import Discuz from '../lib/Discuz'
 import Img from '../lib/Img'
 import { unsafeWindow } from "$";
 import { Logger } from '../lib/Logger';
+import { store } from "../lib/Store";
 
 //定义相关
 interface Style {
@@ -145,9 +146,9 @@ async function update_list(index = 0, is_try = false) {
 }
 
 async function get_data(page: number, cid: number): Promise<Array<ArticleDto>> {
-  if (Discuz.key) {
-    Logger.log('serach page', { key: Discuz.key });
-    let res = await Discuz.search(Discuz.key, page);
+  if (store.route=='search') {
+    Logger.log('serach page', { key: store.key });
+    let res = await Discuz.search(store.key, page);
     return res;
   } else {
     Logger.log('cate page', { page, cid });
@@ -160,20 +161,15 @@ onMounted(async () => {
   await Img.load(loading_img_link);
   await Img.load(img_404_link);
   init_water();
-  await load_more(page_num.value, Discuz.cid);
+  await load_more(page_num.value, store.cid);
 });
 
 let win=location.port?window:unsafeWindow;
-
 win.addEventListener('hashchange', async () => {
   init_water();
   page_num.value = 1;
   item_list.value = [];
-
-  Discuz.initRoute();
-
-  await load_more(page_num.value, Discuz.cid);
-
+  await load_more(page_num.value, store.cid);
 })
 
 win.onscroll = async () => {
@@ -184,7 +180,7 @@ win.onscroll = async () => {
     document.documentElement.scrollHeight || document.body.scrollHeight;
   // Logger.log({scrollTop,windowHeight,scrollHeight});  
   if (scrollTop + windowHeight + 20 >= scrollHeight) {
-    await load_more(page_num.value + 1, Discuz.cid);
+    await load_more(page_num.value + 1, store.cid);
   }
 };
 </script>

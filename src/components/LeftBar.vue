@@ -1,34 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Discuz from "../lib/Discuz";
-
-interface Cate {
-  name: string;
-  id: number;
-  active: boolean;
-}
-// let rou=route;
-
-let cate_list = ref<Array<Cate>>([]);
-let cate_index = ref(1);
-
-let list = Discuz.getCateList();
-
-list.forEach((vo, index) => {
-  if (vo.active) cate_index.value = index;
-});
-
-cate_list.value = list;
-
-
-async function initCate(id: number, index: number) {
-  cate_index.value = index;
-  cate_list.value = cate_list.value.map((vo) => {
-    return { ...vo, ...{ active: id == vo.id } };
-  });
-  Discuz.key = '';
-  location.hash = `id=${id}`;
-}
+import { store } from "../lib/Store";
 </script>
 
 <template>
@@ -36,12 +7,12 @@ async function initCate(id: number, index: number) {
     <div class="logo">
       <img alt="Vue logo" class="logo" src="https://www.cunhua.click/template/bygsjw/image/logo.png" />
     </div>
-    <div class="bar" :style="{ transform: 'translateY(' + 55 * cate_index + 'px)' }"></div>
+    <div class="bar" :style="{ transform: 'translateY(' + (store.cate_index >= 0 ? (55 * store.cate_index) : -1000) + 'px)' }">
+    </div>
     <div class="cate">
-      <div class="item" v-bind:key="index" v-for="(vo, index) in cate_list" :class="{ active: vo.active }"
-        @click="initCate(vo.id, index)">
+      <a :href="'#id=' + vo.id"  class="item" v-bind:key="index" v-for="(vo, index) in store.cate_list" :class="{ active: vo.active }">
         {{ vo.name }}
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -80,7 +51,9 @@ async function initCate(id: number, index: number) {
     flex-direction: column;
     cursor: pointer;
 
-    .item {
+    a.item {
+      display: block;
+      text-decoration: none;
       height: 55px;
       color: #fff;
       font-size: 14px;

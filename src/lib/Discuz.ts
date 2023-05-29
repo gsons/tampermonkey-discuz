@@ -4,20 +4,16 @@ import Http from "./Http";
 import jQuery from 'jQuery';
 import { Logger } from "./Logger";
 import { GM_getValue, GM_setValue } from "$";
+import { store } from "./Store";
 declare let MuURL: any;
 declare let MuObj: any;
 
-type Cate = {
+export type Cate = {
     name: string,
-    id: number,
-    active_index?:number
+    id: number
 };
 
 export default class Discuz {
-
-    static cid: number = 39;
-
-    static key: string = '';
 
     static readonly Img404Link = 'https://jsonp.gitee.io/video/img/404.png';
 
@@ -31,19 +27,11 @@ export default class Discuz {
 
     static searchFormHash: string = '';
 
-    static initRoute() {
-        let [, cid] = /^#id=(\d+)$/.exec(location.hash) ?? [];
-        if (cid) Discuz.cid = +cid;
-        else Discuz.key='';
 
-        let [, key] = /^#key=(.*?)_=\d+$/.exec(location.hash) ?? [];
-        if (key) Discuz.key = key;
-    }
+    static readonly defaultCid: number = 38;
 
     static getCateList(): Array<Cate> {
-        Discuz.initRoute();
-
-        let list:Array<Cate> = [{
+        let list = [{
             name: '国产资源',
             id: 38,
         }, {
@@ -59,12 +47,6 @@ export default class Discuz {
             id: 41,
         },
         ]
-
-
-        list = list.map((vo,index) => {
-            const active=Discuz.cid == vo.id && Discuz.key === '';
-            return { ...vo, ...{active_index:active?index:-1}};
-        });
         return list;
     }
 
@@ -80,9 +62,11 @@ export default class Discuz {
         const objs = jQuery(html).find('.byg_threadlist_pic .byg_pic_img a').map(function () {
             let img_link = jQuery(this).find('v-img').attr('src') || '';
             img_link = img_link.includes('http') ? img_link : (Discuz.BaseUrl + img_link);
+            let href: string = Discuz.BaseUrl + (jQuery(this).attr('href') || '');
+            href = href.replace('&mobile=2', '');
             return {
                 title: jQuery(this).attr('title') || '',
-                href: Discuz.BaseUrl + (jQuery(this).attr('href') || ''),
+                href: href,
                 image_link: img_link,
                 pre_image_link: '',
                 img_rate: 0.72,
@@ -115,7 +99,7 @@ export default class Discuz {
                 "content-type": "application/x-www-form-urlencoded",
                 "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0",
             },
-            timeout: 3000,
+            timeout: 10000,
             body: `formhash=${Discuz.searchFormHash}&srchtxt=${_dkey}&searchsubmit=yes`,
         });
         //  Logger.log(htmlString.text());
@@ -123,7 +107,7 @@ export default class Discuz {
 
         let hash = jQuery(html).find('input[name="formhash"]').val() as string;
         Discuz.searchFormHash = hash;
-    
+
         let res = /searchid=(\d+)/.exec(html) ?? [];
         //let [,searchid] =res;
         if (res && res[1]) {
@@ -138,12 +122,14 @@ export default class Discuz {
         let promise_list = jQuery(html).find('h2.thread_tit + ul').find('li a').map(async function () {
             let url: string = Discuz.BaseUrl + (jQuery(this).attr('href') || '');
             let image_link = Discuz.Img404Link;
+            url=store.is_mobile?url:url.replace('&mobile=2', '');
             try {
                 url = await Discuz.fetchRealUrl(url);
-                // image_link = await Discuz.getImage(url);
+                image_link = await Discuz.getImage(url);
             } catch (error) {
                 Logger.error('load url img failed', url, error);
             }
+            // url = url.replace('&mobile=2', '');
             return {
                 title: jQuery(this).text(),
                 href: url,
@@ -160,15 +146,22 @@ export default class Discuz {
     static async getImage(url: string) {
         const mobileOpt = {
             headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" },
-            timeout: 3000
+            timeout: 10000
         };
-        const pcOpt = {};
-        const opt = url.includes('mobile=') ? mobileOpt : pcOpt;
-        const resp = await Http.fetch(url, opt);
+        const pcOpt = {timeout: 10000};
+        const opt = store.is_mobile ? mobileOpt : pcOpt;
+        let resp;
+        try {
+            resp = await Http.fetch(url, opt);
+        } catch (error) {
+            console.error('getImage',error)
+            return Discuz.Img404Link;
+        }
         const html = resp.text();
         let regex = /<img[^>]+id="aimg_\d+"[^>]*>/g;
         let matches = html.match(regex);
-        Logger.log({matches});
+        // return Discuz.Img404Link;
+        Logger.log({ matches });
         if (matches) {
             let list = matches.map((htmlString) => {
                 const regex = /<img.*?src=["'](.*?)["']/;
@@ -177,17 +170,19 @@ export default class Discuz {
                 const [, zoomfile] = regex2.exec(htmlString) ?? [];
                 return zoomfile ? zoomfile : src;
             });
-            const image_link = list[Math.floor(Math.random() * list.length)];
-            return /^https?/.test(image_link) ? image_link : Discuz.BaseUrl + image_link;
-        } else {
-            return Discuz.Img404Link;
+            Logger.log({ list });
+            const image_link = list[Math.floor(Math.random() * list.length)] as string;
+            if(image_link){
+                return /^https?/.test(image_link) ? image_link : Discuz.BaseUrl + image_link;
+            }
         }
+         return Discuz.Img404Link;
     }
 
 
     static async fetchRealUrl(url: string) {
-        const mobileOpt = { timeout: 3000, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
-        const resp = await Http.fetch(url, mobileOpt);
+        const mobileOpt = { timeout: 10000, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
+        const resp = await Http.fetch(url,store.is_mobile? mobileOpt:{timeout: 10000});
         const html = resp.text();
         if (/<head>/.test(html)) return url;
         let [, jsStr] = /<script.*?>([\s\S]*?)<\/script>/gm.exec(html) ?? [];

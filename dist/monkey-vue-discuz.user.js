@@ -1,11 +1,15 @@
 // ==UserScript==
-// @name         村花论坛tampermonkey
+// @name         论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.02
+// @version      3.04
 // @author       gsonhub
-// @description  村花论坛tampermonkey版本
+// @description  论坛tampermonkey版本
 // @icon         https://vitejs.dev/logo.svg
 // @match        https://jsonp.gitee.io/404.html*
+// @match        http://192.168.88.3:5173/dist/index.html*
+// @match        https://192.168.88.3/*
+// @match        http://192.168.101.188:5173/dist/index.html*
+// @match        https://192.168.101.188/*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
 // @require      https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 // @connect      cunhua.click
@@ -15,7 +19,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-158249c8]{width:125px;height:100vh;display:flex;background-color:#191919;position:relative;padding-top:100px}.left-bar .logo[data-v-158249c8]{position:absolute;top:5px;left:5px}.left-bar .logo img[data-v-158249c8]{height:40px}.left-bar .bar[data-v-158249c8]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-158249c8]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate .item[data-v-158249c8]{height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate .item.active[data-v-158249c8]{color:#fd8d29}.top-bar[data-v-3903b0fe]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-3903b0fe]{flex:1;padding-left:0}.top-bar .logo img[data-v-3903b0fe]{height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-3903b0fe]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-3903b0fe]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-3903b0fe]{flex:1}.top-bar .search-bar .bar .input input[data-v-3903b0fe]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-3903b0fe]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-3903b0fe]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-3903b0fe]{display:inline-block;scale:.6}.top-bar .tool[data-v-3903b0fe]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-3903b0fe]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-3903b0fe]{width:300px}.top-bar .search-bar .bar[data-v-3903b0fe]{width:290px}.top-bar .tool[data-v-3903b0fe]{display:none}}.cate-bar[data-v-8593238d]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar .cate[data-v-8593238d]{margin:10px;color:#fff;font-size:14px}.cate-bar .cate span[data-v-8593238d]{padding-bottom:6px}.cate-bar .cate.active span[data-v-8593238d]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:1}.vo-item .text p{color:#fff;opacity:1}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-d7a231c0]{display:flex}.container .left[data-v-d7a231c0]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-d7a231c0]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-d7a231c0]{display:none}@media (max-width: 768px){.container .left[data-v-d7a231c0]{display:none}.container .right[data-v-d7a231c0]{padding-left:0}.container .right .cate-bar[data-v-d7a231c0]{display:flex;top:50px}} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";:root{--vt-c-white: #ffffff;--vt-c-white-soft: #f8f8f8;--vt-c-white-mute: #f2f2f2;--vt-c-black: #181818;--vt-c-black-soft: #222222;--vt-c-black-mute: #282828;--vt-c-indigo: #2c3e50;--vt-c-divider-light-1: rgba(60, 60, 60, .29);--vt-c-divider-light-2: rgba(60, 60, 60, .12);--vt-c-divider-dark-1: rgba(84, 84, 84, .65);--vt-c-divider-dark-2: rgba(84, 84, 84, .48);--vt-c-text-light-1: var(--vt-c-indigo);--vt-c-text-light-2: rgba(60, 60, 60, .66);--vt-c-text-dark-1: var(--vt-c-white);--vt-c-text-dark-2: rgba(235, 235, 235, .64)}:root{--color-background: var(--vt-c-white);--color-background-soft: var(--vt-c-white-soft);--color-background-mute: var(--vt-c-white-mute);--color-border: var(--vt-c-divider-light-2);--color-border-hover: var(--vt-c-divider-light-1);--color-heading: var(--vt-c-text-light-1);--color-text: var(--vt-c-text-light-1);--section-gap: 160px}@media (prefers-color-scheme: dark){:root{--color-background: var(--vt-c-black);--color-background-soft: var(--vt-c-black-soft);--color-background-mute: var(--vt-c-black-mute);--color-border: var(--vt-c-divider-dark-2);--color-border-hover: var(--vt-c-divider-dark-1);--color-heading: var(--vt-c-text-dark-1);--color-text: var(--vt-c-text-dark-2)}}*,*:before,*:after{box-sizing:border-box;margin:0;font-weight:400}body{min-height:100vh;color:var(--color-text);background:var(--color-background);transition:color .5s,background-color .5s;line-height:1.6;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:15px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#3a3c40}#app{margin:0;padding:0;font-weight:400;min-height:100vh}.left-bar[data-v-e340e55d]{width:125px;height:100vh;display:flex;background-color:#191919;position:relative;padding-top:100px}.left-bar .logo[data-v-e340e55d]{position:absolute;top:5px;left:5px}.left-bar .logo img[data-v-e340e55d]{height:40px}.left-bar .bar[data-v-e340e55d]{width:2px;height:14px;margin-left:20px;margin-top:4px;background-color:#fd8d29;transition:transform .1s}.left-bar .cate[data-v-e340e55d]{flex:1;display:flex;flex-direction:column;cursor:pointer}.left-bar .cate a.item[data-v-e340e55d]{display:block;text-decoration:none;height:55px;color:#fff;font-size:14px;margin-left:10px}.left-bar .cate a.item.active[data-v-e340e55d]{color:#fd8d29}.top-bar[data-v-cdd111c0]{position:fixed;top:0;left:0;z-index:999;width:100%;height:50px;background:#3a3c40;display:flex}.top-bar .logo[data-v-cdd111c0]{flex:1;padding-left:0}.top-bar .logo img[data-v-cdd111c0]{height:50px;display:block;padding:10px}.top-bar .search-bar[data-v-cdd111c0]{width:500px;padding-left:10px}.top-bar .search-bar .bar[data-v-cdd111c0]{width:490px;margin:8px 0;padding-left:17px;border-radius:17px;background-color:#2b2c2f;display:flex}.top-bar .search-bar .bar .input[data-v-cdd111c0]{flex:1}.top-bar .search-bar .bar .input input[data-v-cdd111c0]{width:100%;background-color:#2b2c2f;height:34px;outline:none;border:none;color:#fff}.top-bar .search-bar .bar button[data-v-cdd111c0]{display:flex;justify-content:center;align-items:center;width:100px;height:30px;margin:2px;border:none;font-size:12px;outline:none;border-radius:15px;cursor:pointer;background-color:#4a4b4e;color:#fff}.top-bar .search-bar .bar button[data-v-cdd111c0]:active{background:#3a3c3f}.top-bar .search-bar .bar button .icon[data-v-cdd111c0]{display:inline-block;scale:.6}.top-bar .tool[data-v-cdd111c0]{flex:1;display:flex;flex-direction:row-reverse;align-items:center;margin-right:20px}.top-bar .tool .icon[data-v-cdd111c0]{margin-left:15px;color:#eee;scale:.9}@media (max-width: 768px){.top-bar .search-bar[data-v-cdd111c0]{width:300px}.top-bar .search-bar .bar[data-v-cdd111c0]{width:290px}.top-bar .tool[data-v-cdd111c0]{display:none}}.cate-bar[data-v-5b69aa69]{width:100%;height:50px;position:fixed;display:flex;align-items:end;padding-left:20px;background:#3a3c40;z-index:999}.cate-bar a.cate[data-v-5b69aa69]{display:block;text-decoration:none;margin:10px;color:#fff;font-size:14px}.cate-bar a.cate span[data-v-5b69aa69]{padding-bottom:6px}.cate-bar a.cate.active span[data-v-5b69aa69]{border-bottom:2px solid #fd8d29;color:#fd8d29}.vo-item{text-decoration:none;display:block;border-radius:5px;overflow:hidden}.vo-item .img img{display:block;width:100%;opacity:.1}.vo-item .text p{color:#fff;opacity:.1}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.element{animation:rotate 1s linear infinite;color:#fff;position:fixed;bottom:0;left:50%;width:36px;height:36px;z-index:999}.list-bar{top:50px}@media (max-width: 768px){.list-bar{top:100px}}.container[data-v-98fe678a]{display:flex}.container .left[data-v-98fe678a]{width:125px;position:fixed;z-index:9999;left:0}.container .right[data-v-98fe678a]{width:100%;padding-left:125px}.container .right .cate-bar[data-v-98fe678a]{display:none}@media (max-width: 768px){.container .left[data-v-98fe678a]{display:none}.container .right[data-v-98fe678a]{padding-left:0}.container .right .cate-bar[data-v-98fe678a]{display:flex;top:50px}} ');
 
 (function (vue, jQuery) {
   'use strict';
@@ -27,7 +31,7 @@
     return value;
   };
   let config = {
-    app_name: "村花论坛tampermonkey",
+    app_name: "论坛tampermonkey",
     version: "3.02",
     debug: true,
     host: "cunhua.click"
@@ -137,41 +141,25 @@
     }
   }
   const _Discuz = class {
-    static initRoute() {
-      let [, cid] = /^#id=(\d+)$/.exec(location.hash) ?? [];
-      if (cid)
-        _Discuz.cid = +cid;
-      let [, key] = /^#key=(.*?)_=\d+$/.exec(location.hash) ?? [];
-      if (key)
-        _Discuz.key = key;
-    }
     static getCateList() {
-      _Discuz.initRoute();
       let list = [
         {
           name: "国产资源",
-          id: 38,
-          active: false
+          id: 38
         },
         {
           name: "直播资源",
-          id: 39,
-          active: false
+          id: 39
         },
         {
           name: "亚洲无码",
-          id: 40,
-          active: false
+          id: 40
         },
         {
           name: "亚洲有码",
-          id: 41,
-          active: false
+          id: 41
         }
       ];
-      list = list.map((vo) => {
-        return { ...vo, ...{ active: _Discuz.cid == vo.id && _Discuz.key === "" } };
-      });
       return list;
     }
     static async getListByCate(page = 1, fid = 39) {
@@ -188,9 +176,11 @@
       const objs = jQuery(html).find(".byg_threadlist_pic .byg_pic_img a").map(function() {
         let img_link = jQuery(this).find("v-img").attr("src") || "";
         img_link = img_link.includes("http") ? img_link : _Discuz.BaseUrl + img_link;
+        let href = _Discuz.BaseUrl + (jQuery(this).attr("href") || "");
+        href = href.replace("&mobile=2", "");
         return {
           title: jQuery(this).attr("title") || "",
-          href: _Discuz.BaseUrl + (jQuery(this).attr("href") || ""),
+          href,
           image_link: img_link,
           pre_image_link: "",
           img_rate: 0.72
@@ -198,38 +188,49 @@
       }).get();
       return objs;
     }
+    static async initFormHash() {
+      if (_Discuz.searchFormHash)
+        return;
+      const _url = _Discuz.BaseUrl + "search.php?mod=forum&mobile=2";
+      const res = await Http.fetch(_url);
+      let hash = jQuery(res.text()).find('input[name="formhash"]').val();
+      Logger.log("searchFormHash:" + hash);
+      _Discuz.searchFormHash = hash;
+    }
     static async search(key, page = 1) {
+      await _Discuz.initFormHash();
       const first_url = _Discuz.BaseUrl + "search.php?mod=forum&mobile=2";
+      const _dkey = decodeURIComponent(key);
       const _key = encodeURIComponent(key);
       const search_id = _Discuz.searchIdObj[_key] ? _Discuz.searchIdObj[_key] : 0;
       const keyid_url = `https://cunhua.click/search.php?mod=forum&searchid=${search_id}&orderby=lastpost&ascdesc=desc&searchsubmit=yes&page=${page}&mobile=2`;
       let _url = search_id ? keyid_url : first_url;
-      let body_data = new FormData();
-      body_data.append("formhash", "daebadd2");
-      body_data.append("srchtxt", key);
-      body_data.append("searchsubmit", "yes");
       let htmlString = await Http.fetch(_url, {
         method: "POST",
         headers: {
           "content-type": "application/x-www-form-urlencoded",
           "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0"
         },
-        timeout: 3e4,
-        body: "formhash=daebadd2&srchtxt=" + key + "&searchsubmit=yes"
+        timeout: 1e4,
+        body: `formhash=${_Discuz.searchFormHash}&srchtxt=${_dkey}&searchsubmit=yes`
       });
       let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => {
         return `<v-img${match}>`;
       });
-      let res = /searchid=(\d+)/.exec(html);
+      let hash = jQuery(html).find('input[name="formhash"]').val();
+      _Discuz.searchFormHash = hash;
+      let res = /searchid=(\d+)/.exec(html) ?? [];
       if (res && res[1]) {
         _Discuz.searchIdObj[_key] = +res[1];
       } else {
         Logger.error("can not fetch searchid");
         throw new Error("can not fetch searchid");
       }
+      Logger.log({ _dkey, "searchId": res[1] });
       let promise_list = jQuery(html).find("h2.thread_tit + ul").find("li a").map(async function() {
         let url = _Discuz.BaseUrl + (jQuery(this).attr("href") || "");
         let image_link = _Discuz.Img404Link;
+        url = store.is_mobile ? url : url.replace("&mobile=2", "");
         try {
           url = await _Discuz.fetchRealUrl(url);
           image_link = await _Discuz.getImage(url);
@@ -251,14 +252,21 @@
     static async getImage(url) {
       const mobileOpt = {
         headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" },
-        timeout: 3e4
+        timeout: 1e4
       };
-      const pcOpt = {};
-      const opt = url.includes("mobile=") ? mobileOpt : pcOpt;
-      const resp = await Http.fetch(url, opt);
+      const pcOpt = { timeout: 1e4 };
+      const opt = store.is_mobile ? mobileOpt : pcOpt;
+      let resp;
+      try {
+        resp = await Http.fetch(url, opt);
+      } catch (error) {
+        console.error("getImage", error);
+        return _Discuz.Img404Link;
+      }
       const html = resp.text();
       let regex = /<img[^>]+id="aimg_\d+"[^>]*>/g;
       let matches = html.match(regex);
+      Logger.log({ matches });
       if (matches) {
         let list = matches.map((htmlString) => {
           const regex2 = /<img.*?src=["'](.*?)["']/;
@@ -267,15 +275,17 @@
           const [, zoomfile] = regex22.exec(htmlString) ?? [];
           return zoomfile ? zoomfile : src;
         });
+        Logger.log({ list });
         const image_link = list[Math.floor(Math.random() * list.length)];
-        return /^https?/.test(image_link) ? image_link : _Discuz.BaseUrl + image_link;
-      } else {
-        return _Discuz.Img404Link;
+        if (image_link) {
+          return /^https?/.test(image_link) ? image_link : _Discuz.BaseUrl + image_link;
+        }
       }
+      return _Discuz.Img404Link;
     }
     static async fetchRealUrl(url) {
-      const mobileOpt = { timeout: 3e4, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
-      const resp = await Http.fetch(url, mobileOpt);
+      const mobileOpt = { timeout: 1e4, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
+      const resp = await Http.fetch(url, store.is_mobile ? mobileOpt : { timeout: 1e4 });
       const html = resp.text();
       if (/<head>/.test(html))
         return url;
@@ -297,14 +307,41 @@
     }
   };
   let Discuz = _Discuz;
-  __publicField(Discuz, "cid", 39);
-  __publicField(Discuz, "key", "");
   __publicField(Discuz, "Img404Link", "https://jsonp.gitee.io/video/img/404.png");
   __publicField(Discuz, "ImgLoadingLink", "https://jsonp.gitee.io/video/img/load.gif");
   __publicField(Discuz, "Host", config.host);
   __publicField(Discuz, "BaseUrl", `https://${config.host}/`);
   __publicField(Discuz, "searchIdObj", {});
-  const _withScopeId$1 = (n) => (vue.pushScopeId("data-v-158249c8"), n = n(), vue.popScopeId(), n);
+  __publicField(Discuz, "searchFormHash", "");
+  __publicField(Discuz, "defaultCid", 38);
+  const store = vue.reactive({
+    cate_list: [],
+    cate_index: 0,
+    cid: Discuz.defaultCid,
+    is_mobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+    route: "cate",
+    key: "",
+    initCate: () => {
+      let [, cid] = /^#id=(\d+)$/.exec(location.hash) ?? [];
+      if (cid) {
+        store.cid = +cid;
+        store.route = "cate";
+      }
+      let [, key] = /^#key=(.*?)_=\d+$/.exec(location.hash) ?? [];
+      if (key) {
+        store.key = key;
+        store.route = "search";
+      } else {
+        store.key = "";
+      }
+      let list = Discuz.getCateList();
+      store.cate_list = list.map((vo) => {
+        return { ...vo, ...{ active: store.cid == vo.id && store.route == "cate" } };
+      });
+      store.cate_index = store.cate_list.findIndex((vo) => vo.active);
+    }
+  });
+  const _withScopeId$1 = (n) => (vue.pushScopeId("data-v-e340e55d"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$a = { class: "left-bar" };
   const _hoisted_2$9 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "logo" }, [
     /* @__PURE__ */ vue.createElementVNode("img", {
@@ -314,39 +351,23 @@
     })
   ], -1));
   const _hoisted_3$6 = { class: "cate" };
-  const _hoisted_4$3 = ["onClick"];
+  const _hoisted_4$3 = ["href"];
   const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "LeftBar",
     setup(__props) {
-      let cate_list = vue.ref([]);
-      let cate_index = vue.ref(1);
-      let list = Discuz.getCateList();
-      list.forEach((vo, index) => {
-        if (vo.active)
-          cate_index.value = index;
-      });
-      cate_list.value = list;
-      async function initCate(id, index) {
-        cate_index.value = index;
-        cate_list.value = cate_list.value.map((vo) => {
-          return { ...vo, ...{ active: id == vo.id } };
-        });
-        Discuz.key = "";
-        location.hash = `id=${id}`;
-      }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$a, [
           _hoisted_2$9,
           vue.createElementVNode("div", {
             class: "bar",
-            style: vue.normalizeStyle({ transform: "translateY(" + 55 * vue.unref(cate_index) + "px)" })
+            style: vue.normalizeStyle({ transform: "translateY(" + (vue.unref(store).cate_index >= 0 ? 55 * vue.unref(store).cate_index : -1e3) + "px)" })
           }, null, 4),
           vue.createElementVNode("div", _hoisted_3$6, [
-            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(cate_list), (vo, index) => {
-              return vue.openBlock(), vue.createElementBlock("div", {
+            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(store).cate_list, (vo, index) => {
+              return vue.openBlock(), vue.createElementBlock("a", {
+                href: "#id=" + vo.id,
                 class: vue.normalizeClass(["item", { active: vo.active }]),
-                key: index,
-                onClick: ($event) => initCate(vo.id, index)
+                key: index
               }, vue.toDisplayString(vo.name), 11, _hoisted_4$3);
             }), 128))
           ])
@@ -361,7 +382,7 @@
     }
     return target;
   };
-  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-158249c8"]]);
+  const LeftBar = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-e340e55d"]]);
   const _sfc_main$9 = {};
   const _hoisted_1$9 = {
     xmlns: "http://www.w3.org/2000/svg",
@@ -430,7 +451,7 @@
     return vue.openBlock(), vue.createElementBlock("svg", _hoisted_1$6, _hoisted_3$2);
   }
   const SupportIcon = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$1]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-3903b0fe"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-cdd111c0"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$5 = { class: "top-bar" };
   const _hoisted_2$4 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "logo" }, [
     /* @__PURE__ */ vue.createElementVNode("img", {
@@ -451,6 +472,9 @@
         const t = +/* @__PURE__ */ new Date();
         location.hash = `key=${key.value}_=${t}`;
       }
+      vue.watch(store, () => {
+        key.value = decodeURIComponent(store.key);
+      });
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$5, [
           _hoisted_2$4,
@@ -458,15 +482,16 @@
             vue.createElementVNode("div", _hoisted_4$2, [
               vue.createElementVNode("div", _hoisted_5, [
                 vue.withDirectives(vue.createElementVNode("input", {
-                  type: "text",
+                  type: "search",
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(key) ? key.value = $event : key = $event),
+                  onKeyup: _cache[1] || (_cache[1] = vue.withKeys(($event) => doSearch(), ["enter"])),
                   placeholder: "请输入关键词搜索。。。"
-                }, null, 512), [
+                }, null, 544), [
                   [vue.vModelText, vue.unref(key)]
                 ])
               ]),
               vue.createElementVNode("button", {
-                onClick: _cache[1] || (_cache[1] = ($event) => doSearch())
+                onClick: _cache[2] || (_cache[2] = ($event) => doSearch())
               }, [
                 vue.createVNode(SupportIcon, { class: "icon" }),
                 vue.createTextVNode(" 搜索帖子 ")
@@ -483,30 +508,19 @@
       };
     }
   });
-  const TopBar = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-3903b0fe"]]);
+  const TopBar = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-cdd111c0"]]);
   const _hoisted_1$4 = { class: "cate-bar" };
-  const _hoisted_2$3 = ["onClick"];
+  const _hoisted_2$3 = ["href"];
   const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
     __name: "CateBar",
     setup(__props) {
-      let cate_list = vue.ref([]);
-      let cate_index = vue.ref(1);
-      cate_list.value = Discuz.getCateList();
-      async function initCate(id, index) {
-        cate_index.value = index;
-        cate_list.value = cate_list.value.map((vo) => {
-          return { ...vo, ...{ active: id == vo.id } };
-        });
-        Discuz.key = "";
-        location.hash = `id=${id}`;
-      }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$4, [
-          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(cate_list), (vo, index) => {
-            return vue.openBlock(), vue.createElementBlock("div", {
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(store).cate_list, (vo, index) => {
+            return vue.openBlock(), vue.createElementBlock("a", {
+              href: "#id=" + vo.id,
               class: vue.normalizeClass(["cate", { active: vo.active }]),
-              key: index,
-              onClick: ($event) => initCate(vo.id, index)
+              key: index
             }, [
               vue.createElementVNode("span", null, vue.toDisplayString(vo.name), 1)
             ], 10, _hoisted_2$3);
@@ -515,10 +529,10 @@
       };
     }
   });
-  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-8593238d"]]);
-  const _hoisted_1$3 = ["href"];
+  const CateBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-5b69aa69"]]);
+  const _hoisted_1$3 = ["href", "target"];
   const _hoisted_2$2 = { class: "img" };
-  const _hoisted_3 = ["src"];
+  const _hoisted_3 = ["id", "src"];
   const _hoisted_4$1 = ["id"];
   const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
     __name: "Item",
@@ -536,10 +550,12 @@
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("a", {
           class: "vo-item",
-          href: _ctx.href
+          href: _ctx.href,
+          target: vue.unref(store).is_mobile ? "_self" : "_blank"
         }, [
           vue.createElementVNode("div", _hoisted_2$2, [
             vue.createElementVNode("img", {
+              id: "vo-item-img-" + _ctx.index,
               src: _ctx.pre_image_link,
               alt: "",
               style: vue.normalizeStyle({ height: (_ctx.width || 150) / _ctx.img_rate + "px" })
@@ -547,7 +563,7 @@
           ]),
           vue.createElementVNode("div", {
             class: "text",
-            id: "vo-item-img-" + _ctx.index
+            id: "vo-item-p-" + _ctx.index
           }, [
             vue.createElementVNode("p", null, vue.toDisplayString(_ctx.title), 1)
           ], 8, _hoisted_4$1)
@@ -585,29 +601,33 @@
         img.src = image_link;
         let timer = setTimeout(() => {
           is_timeout = true;
-          resolve(null);
-          Logger.error("load image " + image_link + " failed on timeout 10s");
-        }, 3e4);
+          resolve({ status: "timeout" });
+          Logger.error("load image " + image_link + " failed on timeout 5s");
+        }, 5e3);
         img.onload = async () => {
           if (is_timeout)
             func.call(this, true);
-          _Img.List.push(image_link_key);
-          _Img.imgObjList[image_link_key] = img;
+          const imgobj = {
+            status: 200,
+            rate: img.width / img.height,
+            width: img.width,
+            height: img.height
+          };
+          _Img.imgObjList[image_link_key] = imgobj;
           clearTimeout(timer);
-          resolve(img);
+          resolve(imgobj);
         };
         img.onerror = () => {
           if (is_timeout)
             func.call(this, false);
           clearTimeout(timer);
-          resolve(null);
+          resolve({ status: 404 });
           Logger.error("load image " + image_link + " failed onerror");
         };
       });
     }
   };
   let Img = _Img;
-  __publicField(Img, "List", []);
   __publicField(Img, "imgObjList", {});
   const _hoisted_1$1 = {
     class: "list-bar",
@@ -627,13 +647,19 @@
       let h_arr = [];
       async function load_article_img(vo, index) {
         const img = await Img.load(vo.image_link, (is_load) => {
-          Logger.log({ is_load }, vo.image_link);
+          Logger.log("callback", { is_load }, vo.image_link);
+          const dom = document.getElementById(`vo-item-img-${index}`);
           vo.pre_image_link = is_load ? vo.image_link : Discuz.Img404Link;
+          dom.setAttribute("src", vo.pre_image_link);
           item_list.value[index] = vo;
         });
-        vo.loaded = img ? true : false;
-        vo.img_rate = img ? img.width / img.height : 0.72;
-        vo.pre_image_link = img ? vo.image_link : Discuz.ImgLoadingLink;
+        vo.loaded = img.status == 200;
+        vo.img_rate = img.status == 200 ? img.rate : 0.72;
+        if (img.status == 200) {
+          vo.pre_image_link = vo.image_link;
+        } else if (img.status == 404) {
+          vo.pre_image_link = Discuz.Img404Link;
+        }
         return vo;
       }
       async function load_more(page, cid) {
@@ -650,7 +676,7 @@
         try {
           list = await get_data(page, cid);
         } catch (error) {
-          let msg = "加载失败，请检查网络状况:";
+          let msg = "加载失败,请检查网络状况:";
           if (error instanceof Error) {
             msg += error.message;
           } else if (typeof error === "string") {
@@ -662,7 +688,7 @@
         }
         Logger.log({ list });
         let arr = list.map((vo) => {
-          const rate = loading_img.width / loading_img.height;
+          const rate = loading_img.rate;
           return {
             image_link: vo.image_link,
             img_rate: rate,
@@ -715,7 +741,7 @@
           const h_i = h_arr.indexOf(Math.min(...h_arr));
           vo.top = h_arr[h_i];
           vo.left = h_i * (offset + item_width);
-          const dom = document.getElementById(`vo-item-img-${i}`);
+          const dom = document.getElementById(`vo-item-p-${i}`);
           const _height = item_width / vo.img_rate + dom.getBoundingClientRect().height + offset;
           h_arr[h_i] += _height;
           i++;
@@ -724,9 +750,9 @@
           h_arr = last_h_arr;
       }
       async function get_data(page, cid) {
-        if (Discuz.key) {
-          Logger.log("serach page", { key: Discuz.key });
-          let res = await Discuz.search(Discuz.key, page);
+        if (store.route == "search") {
+          Logger.log("serach page", { key: store.key });
+          let res = await Discuz.search(store.key, page);
           return res;
         } else {
           Logger.log("cate page", { page, cid });
@@ -738,21 +764,21 @@
         await Img.load(loading_img_link);
         await Img.load(img_404_link);
         init_water();
-        await load_more(page_num.value, Discuz.cid);
+        await load_more(page_num.value, store.cid);
       });
-      _unsafeWindow.addEventListener("hashchange", async () => {
+      let win = location.port ? window : _unsafeWindow;
+      win.addEventListener("hashchange", async () => {
         init_water();
         page_num.value = 1;
         item_list.value = [];
-        Discuz.initRoute();
-        await load_more(page_num.value, Discuz.cid);
+        await load_more(page_num.value, store.cid);
       });
-      _unsafeWindow.onscroll = async () => {
+      win.onscroll = async () => {
         let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         let windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
         let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-        if (scrollTop + windowHeight + 15 >= scrollHeight) {
-          await load_more(page_num.value + 1, Discuz.cid);
+        if (scrollTop + windowHeight + 20 >= scrollHeight) {
+          await load_more(page_num.value + 1, store.cid);
         }
       };
       return (_ctx, _cache) => {
@@ -795,6 +821,13 @@
   const _sfc_main = /* @__PURE__ */ vue.defineComponent({
     __name: "App",
     setup(__props) {
+      let win = location.port ? window : _unsafeWindow;
+      win.addEventListener("hashchange", async () => {
+        store.initCate();
+      });
+      vue.onMounted(() => {
+        store.initCate();
+      });
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
           vue.createVNode(LeftBar, { class: "left" }),
@@ -807,7 +840,7 @@
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d7a231c0"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-98fe678a"]]);
   function initHead() {
     var _a;
     let metaElements = document.getElementsByTagName("meta");
