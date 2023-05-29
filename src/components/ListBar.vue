@@ -32,13 +32,20 @@ const offset = 10;
 
 async function load_article_img(vo: ItemDto, index: number) {
   const img = await Img.load(vo.image_link, (is_load) => {
-    Logger.log({ is_load }, vo.image_link);
+    Logger.log('callback', { is_load }, vo.image_link);
+    const dom = document.getElementById(`vo-item-img-${index}`) as HTMLDivElement;
     vo.pre_image_link = is_load ? vo.image_link : Discuz.Img404Link;
+    dom.setAttribute('src', vo.pre_image_link);
     item_list.value[index] = vo;
   });
-  vo.loaded = img ? true : false;
-  vo.img_rate = img ? img.width / img.height : 0.72;
-  vo.pre_image_link = img ? vo.image_link : Discuz.ImgLoadingLink;
+  vo.loaded = img.status==200;
+  vo.img_rate = img.status==200? img.rate as number : 0.72;
+  if(img.status==200){
+    vo.pre_image_link=vo.image_link;
+  }
+  else if(img.status==404){
+    vo.pre_image_link=Discuz.Img404Link;
+  }
   return vo;
 }
 
@@ -51,13 +58,13 @@ async function load_more(page: number, cid: number) {
     is_loading_img.value = true;
   }
   Logger.log('load page start', { cid, page });
-  const loading_img = await Img.load(loading_img_link) as HTMLImageElement;
+  const loading_img = await Img.load(loading_img_link);
 
   let list: Array<ArticleDto> = [];
   try {
     list = await get_data(page, cid);
   } catch (error) {
-    let msg = '加载失败，请检查网络状况:';
+    let msg = '加载失败,请检查网络状况:';
     if (error instanceof Error) {
       msg += error.message;
     }
@@ -73,7 +80,7 @@ async function load_more(page: number, cid: number) {
   Logger.log({ list });
 
   let arr: Array<ItemDto> = list.map((vo) => {
-    const rate = loading_img.width / loading_img.height;
+    const rate = loading_img.rate as number;
     return {
       image_link: vo.image_link,
       img_rate: rate,
@@ -129,7 +136,7 @@ async function update_list(index = 0, is_try = false) {
     const h_i = h_arr.indexOf(Math.min(...h_arr));
     vo.top = h_arr[h_i];
     vo.left = h_i * (offset + item_width);
-    const dom = document.getElementById(`vo-item-img-${i}`) as HTMLDivElement;
+    const dom = document.getElementById(`vo-item-p-${i}`) as HTMLDivElement;
     const _height = (item_width / vo.img_rate) + dom.getBoundingClientRect().height + offset;
     h_arr[h_i] += _height;
     i++;
@@ -156,7 +163,9 @@ onMounted(async () => {
   await load_more(page_num.value, Discuz.cid);
 });
 
-unsafeWindow.addEventListener('hashchange', async () => {
+let win=location.port?window:unsafeWindow;
+
+win.addEventListener('hashchange', async () => {
   init_water();
   page_num.value = 1;
   item_list.value = [];
@@ -167,14 +176,14 @@ unsafeWindow.addEventListener('hashchange', async () => {
 
 })
 
-unsafeWindow.onscroll = async () => {
+win.onscroll = async () => {
   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   let windowHeight =
     document.documentElement.clientHeight || document.body.clientHeight;
   let scrollHeight =
     document.documentElement.scrollHeight || document.body.scrollHeight;
   // Logger.log({scrollTop,windowHeight,scrollHeight});  
-  if (scrollTop + windowHeight + 15 >= scrollHeight) {
+  if (scrollTop + windowHeight + 20 >= scrollHeight) {
     await load_more(page_num.value + 1, Discuz.cid);
   }
 };
@@ -185,12 +194,12 @@ unsafeWindow.onscroll = async () => {
     <Item :width="item.width" :index="index" :img_rate="item.img_rate" :title="item.title" :image_link="item.image_link"
       :pre_image_link="item.pre_image_link" :href="item.href" class="li" v-bind:key="index"
       v-for="(item, index) in item_list" :id="'vo-item-' + index" :style="{
-          width: item.width + 'px',
-          height: item.height + 'px',
-          left: item.left + 'px',
-          top: item.top + 'px',
-          position: item.position
-        }">
+        width: item.width + 'px',
+        height: item.height + 'px',
+        left: item.left + 'px',
+        top: item.top + 'px',
+        position: item.position
+      }">
       {{ item.title }}
     </Item>
   </div>

@@ -12,14 +12,16 @@ export interface ArticleDto {
 }
 
 defineProps<ArticleDto>();
+
+
 </script>
 
 <template>
     <a class="vo-item" :href="href">
         <div class="img">
-            <img :src="pre_image_link" alt="" :style="{height:((width||150)/img_rate)+'px'}">
+            <img :id="'vo-item-img-' + index"  :src="pre_image_link" alt="" :style="{height:((width||150)/img_rate)+'px'}">
         </div>
-        <div class="text" :id="'vo-item-img-' + index">
+        <div class="text" :id="'vo-item-p-' + index">
             <p>
                 {{ title }}
             </p>
@@ -38,14 +40,14 @@ defineProps<ArticleDto>();
         img {
             display: block;
             width: 100%;
-            opacity:1
+            opacity:0.01
         }
     }
 
     .text { 
         p {
             color: #FFF;
-            opacity:1
+            opacity:0.01
         }
     }
 }

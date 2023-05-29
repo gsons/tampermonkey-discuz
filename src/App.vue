@@ -3,6 +3,8 @@ import LeftBar from "./components/LeftBar.vue";
 import TopBar from "./components/TopBar.vue";
 import CateBar from "./components/CateBar.vue";
 import ListBar from "./components/ListBar.vue";
+
+
 </script>
 
 <template>
