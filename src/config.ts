@@ -1,6 +1,6 @@
 let config={
     app_name:'论坛tampermonkey',
-    version:'3.02',
+    version:'3.05',
     debug:true,
     host:'cunhua.click'
 }
