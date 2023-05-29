@@ -9,27 +9,34 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        name:'论坛tampermonkey',
-        description:'论坛tampermonkey版本',
-        author:'gsonhub',
-        version:'3.03',
+        name: '论坛tampermonkey',
+        description: '论坛tampermonkey版本',
+        author: 'gsonhub',
+        version: '3.03',
         icon: 'https://vitejs.dev/logo.svg',
-        "run-at":'document-end',
+        "run-at": 'document-end',
         namespace: 'npm/vite-plugin-monkey',
-        match: ['https://jsonp.gitee.io/404.html*','http://192.168.88.3:5173/dist/index.html*','https://192.168.88.3/*'],
-        connect:['cunhua.click','www.cunhua.click']
+        match: [
+          'https://jsonp.gitee.io/404.html*',
+          'http://192.168.88.3:5173/dist/index.html*',
+          'https://192.168.88.3/*',
+          'http://192.168.101.188:5173/dist/index.html*',
+          'https://192.168.101.188/*'
+        ],
+        connect: ['cunhua.click', 'www.cunhua.click']
       },
       build: {
         externalGlobals: {
           vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
-          jQuery: cdn.jsdelivr('jQuery','dist/jquery.min.js'),
+          jQuery: cdn.jsdelivr('jQuery', 'dist/jquery.min.js'),
         },
       },
     }),
   ],
-  server:{
-    host:'192.168.88.3',
-    open:false,
+  //192.168.101.188 192.168.88.3
+  server: {
+    host: '192.168.101.188',
+    open: false,
   },
 
 });
