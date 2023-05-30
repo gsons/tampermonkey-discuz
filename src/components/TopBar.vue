@@ -7,15 +7,19 @@ import CommunityIcon from '../icons/IconCommunity.vue'
 import SupportIcon from '../icons/IconSupport.vue'
 import { store } from '../lib/Store'
 
-let key=ref<string>('');
+let key = ref<string>('');
 
-function doSearch(){
-    const t=+new Date();
-    location.hash=`key=${key.value}_=${t}`;
+function doSearch() {
+    const t = +new Date();
+    location.hash = `key=${key.value}_=${t}`;
 }
 
-watch(store,()=>{
-     key.value=decodeURIComponent(store.key);
+onMounted(() => {
+    key.value = decodeURIComponent(store.key);
+});
+
+watch(store, () => {
+    key.value = decodeURIComponent(store.key);
 });
 
 
@@ -38,7 +42,7 @@ watch(store,()=>{
             </div>
         </div>
         <div class="tool">
-            <ToolingIcon class="icon"/>
+            <ToolingIcon class="icon" />
             <SupportIcon class="icon" />
             <CommunityIcon class="icon" />
             <EcosystemIcon class="icon" />
@@ -148,6 +152,7 @@ watch(store,()=>{
                 width: 290px;
             }
         }
+
         .tool {
             display: none;
         }

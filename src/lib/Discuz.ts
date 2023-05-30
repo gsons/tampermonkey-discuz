@@ -5,6 +5,7 @@ import jQuery from 'jQuery';
 import { Logger } from "./Logger";
 import { GM_getValue, GM_setValue } from "$";
 import { store } from "./Store";
+import Img from "./Img";
 declare let MuURL: any;
 declare let MuObj: any;
 
@@ -17,9 +18,15 @@ export default class Discuz {
 
     static readonly Img404Link = 'https://jsonp.gitee.io/video/img/404.png';
 
+    static Img404Rate: number;
+
     static readonly ImgLoadingLink = 'https://jsonp.gitee.io/video/img/load.gif';
 
+    static ImgLoadRate: number;
+
     static readonly Host: string = config.host;
+
+    static readonly DefaultRate = 0.72;
 
     static readonly BaseUrl: string = `https://${config.host}/`;
 
@@ -69,11 +76,19 @@ export default class Discuz {
                 href: href,
                 image_link: img_link,
                 pre_image_link: '',
-                img_rate: 0.72,
+                img_rate: Discuz.ImgLoadRate,
             }
         }).get();
 
         return objs;
+    }
+
+    static async init() {
+        Discuz.initFormHash().then();
+        const img404 = await Img.load(Discuz.Img404Link);
+        Discuz.Img404Rate = img404.rate ?? Discuz.DefaultRate;
+        const imgLoad = await Img.load(Discuz.ImgLoadingLink);
+        Discuz.ImgLoadRate = imgLoad.rate ?? Discuz.DefaultRate;
     }
 
     static async initFormHash() {
@@ -104,12 +119,10 @@ export default class Discuz {
         });
         //  Logger.log(htmlString.text());
         let html = htmlString.text().replace(/<img([^>]*)>/g, (m, match) => { return `<v-img${match}>` });
-
         let hash = jQuery(html).find('input[name="formhash"]').val() as string;
         Discuz.searchFormHash = hash;
 
         let res = /searchid=(\d+)/.exec(html) ?? [];
-        //let [,searchid] =res;
         if (res && res[1]) {
             Discuz.searchIdObj[_key] = +res[1];
         } else {
@@ -122,20 +135,13 @@ export default class Discuz {
         let promise_list = jQuery(html).find('h2.thread_tit + ul').find('li a').map(async function () {
             let url: string = Discuz.BaseUrl + (jQuery(this).attr('href') || '');
             let image_link = Discuz.Img404Link;
-            url=store.is_mobile?url:url.replace('&mobile=2', '');
-            try {
-                url = await Discuz.fetchRealUrl(url);
-                image_link = await Discuz.getImage(url);
-            } catch (error) {
-                Logger.error('load url img failed', url, error);
-            }
-            // url = url.replace('&mobile=2', '');
+            url = store.is_mobile ? url : url.replace('&mobile=2', '');
             return {
                 title: jQuery(this).text(),
                 href: url,
                 image_link: image_link,
                 pre_image_link: '',
-                img_rate: 0.72,
+                img_rate: Discuz.ImgLoadRate,
             }
         }).get();
         let list = await Promise.all(promise_list);
@@ -146,43 +152,38 @@ export default class Discuz {
     static async getImage(url: string) {
         const mobileOpt = {
             headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" },
-            timeout: 10000
+            timeout: 15000
         };
-        const pcOpt = {timeout: 10000};
+        const pcOpt = { timeout: 15000 };
         const opt = store.is_mobile ? mobileOpt : pcOpt;
         let resp;
         try {
             resp = await Http.fetch(url, opt);
         } catch (error) {
-            console.error('getImage',error)
+            Logger.error('getImage', error)
             return Discuz.Img404Link;
         }
-        const html = resp.text();
-        let regex = /<img[^>]+id="aimg_\d+"[^>]*>/g;
-        let matches = html.match(regex);
         // return Discuz.Img404Link;
-        Logger.log({ matches });
-        if (matches) {
-            let list = matches.map((htmlString) => {
-                const regex = /<img.*?src=["'](.*?)["']/;
-                const [, src] = regex.exec(htmlString) ?? [];
-                const regex2 = /<img.*?zoomfile=["'](.*?)["']/;
-                const [, zoomfile] = regex2.exec(htmlString) ?? [];
-                return zoomfile ? zoomfile : src;
-            });
-            Logger.log({ list });
-            const image_link = list[Math.floor(Math.random() * list.length)] as string;
-            if(image_link){
-                return /^https?/.test(image_link) ? image_link : Discuz.BaseUrl + image_link;
-            }
+        // Logger.log('mid',url);
+        let html = resp.text().replace(/<img([^>]*)>/g, (m, match) => { return `<v-img${match}>` });
+        let img_list = jQuery(html).find('[id^="aimg_"]').map(function () {
+            let src = jQuery(this).attr('src') || '';
+            let zoomfile = jQuery(this).attr('zoomfile') || '';
+            return zoomfile ? zoomfile : src;
+        }).get();
+        // Logger.log({url,img_list});
+        if (img_list && img_list.length > 0) {
+            const image_link = img_list[Math.floor(Math.random() * img_list.length)] as string;
+            return /^https?/.test(image_link) ? image_link : Discuz.BaseUrl + image_link;
+        } else {
+            return Discuz.Img404Link;
         }
-         return Discuz.Img404Link;
     }
 
 
     static async fetchRealUrl(url: string) {
         const mobileOpt = { timeout: 10000, headers: { "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/113.0.0.0" } };
-        const resp = await Http.fetch(url,store.is_mobile? mobileOpt:{timeout: 10000});
+        const resp = await Http.fetch(url, store.is_mobile ? mobileOpt : { timeout: 10000 });
         const html = resp.text();
         if (/<head>/.test(html)) return url;
         let [, jsStr] = /<script.*?>([\s\S]*?)<\/script>/gm.exec(html) ?? [];
@@ -195,10 +196,8 @@ export default class Discuz {
         jsStr = temp + jsStr.replaceAll('location', 'MuObj');
         // Logger.log(jsStr);
         let func = new Function(jsStr);
-        func();
-
+        func.call(this);
         MuURL = MuURL ? MuURL : (MuObj.href || MuObj);
-
         let [, _dsign] = /_dsign=(.*)/gm.exec(MuURL) ?? [];
         const sign = url.includes('?') ? '&' : '?';
         const _url = `${url}${sign}_dsign=${_dsign}`;

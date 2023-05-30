@@ -3,14 +3,14 @@ import { store } from '../lib/Store';
 
 
 export interface ArticleDto {
-    width?:number,
+    width?: number,
     title: string,
     image_link: string,
     pre_image_link: string,
-    img_rate:number,
+    img_rate: number,
     href: string
-    loaded?:boolean
-    index?:number
+    loaded?: boolean
+    index?: number
 }
 
 defineProps<ArticleDto>();
@@ -18,9 +18,9 @@ defineProps<ArticleDto>();
 </script>
 
 <template>
-    <a class="vo-item" :href="href" :target="store.is_mobile?'_self':'_blank'">
+    <a class="vo-item" :href="href" :target="store.is_mobile ? '_self' : '_blank'">
         <div class="img">
-            <img :id="'vo-item-img-' + index"  :src="pre_image_link" alt="" :style="{height:((width||150)/img_rate)+'px'}">
+            <img :id="'vo-item-img-' + index" :src="pre_image_link" alt="" :style="{ height: ((width || 150) / img_rate) + 'px' }">
         </div>
         <div class="text" :id="'vo-item-p-' + index">
             <p>
@@ -37,18 +37,19 @@ defineProps<ArticleDto>();
     display: block;
     border-radius: 5px;
     overflow: hidden;
+
     .img {
         img {
             display: block;
             width: 100%;
-            opacity:1
+            opacity: 1
         }
     }
 
-    .text { 
+    .text {
         p {
             color: #FFF;
-            opacity:1
+            opacity: 1
         }
     }
 }
