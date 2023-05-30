@@ -19,10 +19,8 @@ export default defineConfig({
         namespace: 'npm/vite-plugin-monkey',
         match: [
           'https://jsonp.gitee.io/404.html*',
-          'http://192.168.88.3:5173/dist/index.html*',
-          'https://192.168.88.3/*',
-          'http://192.168.101.188:5173/dist/index.html*',
-          'https://192.168.101.188/*'
+          'http://192.168.88.3:5173/dev/index.html*',
+          'http://192.168.101.188:5173/dev/index.html*'
         ],
         connect: ['cunhua.click', 'www.cunhua.click']
       },

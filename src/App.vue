@@ -5,15 +5,18 @@ import CateBar from "./components/CateBar.vue";
 import ListBar from "./components/ListBar.vue";
 import { unsafeWindow } from "$";
 import { store } from "./lib/Store";
-import { onBeforeMount, onMounted } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import Discuz from "./lib/Discuz";
 
-let win = location.port ? window : unsafeWindow;
+
+let port = ref(location.port ? true : false);
+let win = port.value ? window : unsafeWindow;
+
 win.addEventListener('hashchange', async () => {
   store.initCate();
 })
 
-onBeforeMount(()=>{
+onBeforeMount(() => {
   store.initCate();
 });
 
@@ -24,7 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container" :style="{}">
+  <div class="container" :style="{ opacity: port ? 0.2 : 1 }">
     <LeftBar class="left"></LeftBar>
     <div class="right">
       <TopBar></TopBar>
@@ -37,7 +40,6 @@ onMounted(async () => {
 <style scoped lang="scss">
 .container {
   display: flex;
-  opacity: 0.2;
 
   .left {
     width: 125px;
