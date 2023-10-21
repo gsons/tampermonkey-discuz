@@ -10,7 +10,7 @@
 // @match        http://192.168.88.3:5173/dev/index.html*
 // @match        http://192.168.101.188:5173/dev/index.html*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
-// @require      https://cdn.jsdelivr.net/npm/jQuery@3.7.0/dist/jquery.min.js
+// @require      https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js
 // @connect      cunhua.pics
 // @connect      www.cunhua.pics
 // @grant        GM_xmlhttpRequest
@@ -31,8 +31,8 @@
   };
   let config = {
     app_name: "论坛tampermonkey",
-    version: "3.07",
-    debug: true,
+    version: "3.08",
+    debug: false,
     host: "cunhua.pics"
   };
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
