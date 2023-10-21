@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.07
+// @version      3.08
 // @author       gsonhub
 // @description  论坛tampermonkey版本
 // @license      MIT
