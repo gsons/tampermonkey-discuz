@@ -26,7 +26,7 @@ export class Logger {
         return '';
     }
 
-    static log(...info: any) {
+    static log(...info: unknown[]) {
         const trace=Logger.traceCall();
         info=[...info,trace];
         if (Logger.debug) console.log(Logger.appName, new Date().toLocaleString(), ...info);

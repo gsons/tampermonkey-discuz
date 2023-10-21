@@ -13,7 +13,7 @@ export default defineConfig({
         description: '论坛tampermonkey版本',
         license:'MIT',
         author: 'gsonhub',
-        version: '3.06',
+        version: '3.07',
         icon: 'https://vitejs.dev/logo.svg',
         "run-at": 'document-end',
         namespace: 'npm/vite-plugin-monkey',
@@ -22,7 +22,7 @@ export default defineConfig({
           'http://192.168.88.3:5173/dev/index.html*',
           'http://192.168.101.188:5173/dev/index.html*'
         ],
-        connect: ['cunhua.click', 'www.cunhua.click']
+        connect: ['cunhua.pics', 'www.cunhua.pics']
       },
       build: {
         externalGlobals: {

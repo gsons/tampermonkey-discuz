@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.06
+// @version      3.07
 // @author       gsonhub
 // @description  论坛tampermonkey版本
 // @license      MIT
@@ -10,9 +10,9 @@
 // @match        http://192.168.88.3:5173/dev/index.html*
 // @match        http://192.168.101.188:5173/dev/index.html*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
-// @require      https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
-// @connect      cunhua.click
-// @connect      www.cunhua.click
+// @require      https://cdn.jsdelivr.net/npm/jQuery@3.7.0/dist/jquery.min.js
+// @connect      cunhua.pics
+// @connect      www.cunhua.pics
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // @run-at       document-end
@@ -31,9 +31,9 @@
   };
   let config = {
     app_name: "论坛tampermonkey",
-    version: "3.06",
+    version: "3.07",
     debug: true,
-    host: "cunhua.click"
+    host: "cunhua.pics"
   };
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
