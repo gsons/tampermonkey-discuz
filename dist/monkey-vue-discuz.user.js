@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛tampermonkey
 // @namespace    npm/vite-plugin-monkey
-// @version      3.07
+// @version      3.08
 // @author       gsonhub
 // @description  论坛tampermonkey版本
 // @license      MIT
@@ -10,9 +10,11 @@
 // @match        http://192.168.88.3:5173/dev/index.html*
 // @match        http://192.168.101.188:5173/dev/index.html*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
-// @require      https://cdn.jsdelivr.net/npm/jQuery@3.7.0/dist/jquery.min.js
+// @require      https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 // @connect      cunhua.pics
 // @connect      www.cunhua.pics
+// @connect      cunhua.moe
+// @connect      www.cunhua.moe
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // @run-at       document-end
