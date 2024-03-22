@@ -33,8 +33,8 @@
   };
   let config = {
     app_name: "论坛tampermonkey",
-    version: "3.07",
-    debug: true,
+    version: "3.08",
+    debug: false,
     host: "cunhua.pics"
   };
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
